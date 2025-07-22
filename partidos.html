@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultados - OW Andromeda</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Orbitron (títulos) e Inter (cuerpo) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
+    
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <style>
+        /* Aplicar las fuentes personalizadas a través de las clases de Tailwind */
+        .font-orbitron { font-family: 'Orbitron', sans-serif; }
+        .font-inter { font-family: 'Inter', sans-serif; }
+        
+        /* Estilo para el fondo */
+        .main-bg {
+            background-color: #0a0a0a; /* Fondo negro profundo */
+        }
+        
+        /* Animación de spinner para cargas */
+        .spinner {
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-top-color: #f97316; /* Naranja */
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Estilos para la barra de scroll de las jornadas */
+        .jornada-nav::-webkit-scrollbar {
+            height: 4px;
+        }
+        .jornada-nav::-webkit-scrollbar-track {
+            background: #27272a; /* zinc-800 */
+        }
+        .jornada-nav::-webkit-scrollbar-thumb {
+            background: #f97316; /* orange-500 */
+            border-radius: 2px;
+        }
+    </style>
+</head>
+<body class="bg-zinc-950 text-slate-200 font-inter">
+
+    <!-- ===== Header / Navegación ===== -->
+    <header id="header" class="bg-zinc-950/80 backdrop-blur-sm sticky top-0 left-0 w-full z-50 transition-all duration-300">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <!-- Logo -->
+            <a href="index.html" class="text-2xl font-orbitron font-bold text-white">
+                OW<span class="text-orange-500">A</span>
+            </a>
+            
+            <!-- Menú para Desktop -->
+            <div class="hidden md:flex items-center space-x-8">
+              <a href="index.html" class="hover:text-orange-500 transition-colors">Inicio</a>
+              <a href="mercado.html" class="hover:text-orange-500 transition-colors">Mercato</a>
+              <a href="clasificacion.html" class="hover:text-orange-500 transition-colors">Clasificación</a>              
+              <a href="normativa.html" class="hover:text-orange-500 transition-colors">Normativa</a>
+            </div>
+            
+            <!-- Botón de Inscripción (Desktop) -->
+            <a href="https://www.faceit.com/es/championship/63f68d66-d67e-4a2b-a655-4ba8c18214dd/Season%2520II" target="_blank" class="hidden md:block bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-5 rounded-lg transition-all duration-300 transform hover:scale-105">
+                Inscríbete
+            </a>
+
+            <!-- Botón de Menú Móvil -->
+            <button id="mobile-menu-button" class="md:hidden text-white focus:outline-none">
+                <i class="ph-fill ph-list text-3xl"></i>
+            </button>
+        </nav>
+
+        <!-- Menú Móvil (Oculto por defecto) -->
+        <div id="mobile-menu" class="hidden md:hidden bg-zinc-900">
+            <a href="index.html" class="hover:text-orange-500 transition-colors">Inicio</a>
+              <a href="mercado.html" class="hover:text-orange-500 transition-colors">Mercato</a>
+              <a href="clasificacion.html" class="hover:text-orange-500 transition-colors">Clasificación</a>              
+              <a href="normativa.html" class="hover:text-orange-500 transition-colors">Normativa</a>
+            <a href="https://www.faceit.com/es/championship/63f68d66-d67e-4a2b-a655-4ba8c18214dd/Season%2520II" target="_blank" class="block text-center py-4 px-4 bg-orange-500 text-white font-bold">Inscríbete</a>
+        </div>
+    </header>
+
+    <main class="main-bg pt-24 pb-20">
+        <div class="container mx-auto px-6">
+            <!-- Encabezado -->
+            <div class="text-center mb-12">
+                <h1 class="text-5xl md:text-6xl font-orbitron font-bold text-white">Partidos y Resultados</h1>
+                <p class="mt-4 max-w-3xl mx-auto text-slate-400">
+                    Consulta los resultados de todas las jornadas de la liga OW Andromeda.
+                </p>
+            </div>
+            
+            <!-- Navegación de Jornadas -->
+            <div class="border-b border-zinc-800 mb-12">
+                <nav id="jornada-nav" class="horizontal-scroll flex justify-center space-x-8 -mb-px overflow-x-auto" aria-label="Tabs">
+                    <!-- Las pestañas se generarán aquí -->
+                </nav>
+            </div>
+
+            <!-- Contenedor de Jornadas -->
+            <div id="jornadas-container" class="max-w-4xl mx-auto">
+                <!-- Aquí se generarán las jornadas y playoffs dinámicamente -->
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Chronicle Modal -->
+    <div id="chronicle-modal" class="hidden fixed inset-0 bg-black/70 backdrop-blur-sm z-[110] flex items-center justify-center p-4">
+        <div id="chronicle-modal-content" class="bg-zinc-900 border-2 border-orange-500 rounded-lg shadow-2xl shadow-orange-500/30 max-w-2xl w-full p-8 relative transform transition-all scale-95 opacity-0">
+            <button id="close-chronicle-modal-btn" class="absolute top-4 right-4 text-slate-400 hover:text-white">
+                <i class="ph-fill ph-x text-2xl"></i>
+            </button>
+            <h2 id="chronicle-modal-title" class="text-3xl font-orbitron font-bold text-white text-center mb-4">Crónica del Partido</h2>
+            <div id="chronicle-modal-text" class="text-slate-300 space-y-4 leading-relaxed max-h-[60vh] overflow-y-auto pr-4">
+                <!-- Gemini content will be injected here -->
+                <div class="flex justify-center items-center h-32"><div class="spinner"></div></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== Footer ===== -->
+    <footer class="bg-black py-10">
+        <div class="container mx-auto px-6 text-center text-slate-500">
+            <!-- NUEVA SECCIÓN: Patrocinadores -->
+            <div class="mb-10">
+                <h3 class="text-sm uppercase tracking-widest text-slate-400 mb-6" data-translate="sponsorsTitle">Nuestros patrocinadores</h3>
+                <div class="flex justify-center items-center gap-8 opacity-60">
+                    <img src="assets/img/FACEIT.png" alt="FACEIT Logo" class="h-8 filter grayscale hover:grayscale-0 transition-all duration-300">
+                </div>
+            </div>
+            <div class="flex justify-center space-x-6 mt-6">
+                <a href="https://twitter.com/OWAndromedaes" target="_blank" class="hover:text-orange-500 transition-colors"><i class="ph-fill ph-twitter-logo text-2xl"></i></a>
+                <a href="https://www.twitch.tv/owandromedaes" target="_blank" class="hover:text-orange-500 transition-colors"><i class="ph-fill ph-twitch-logo text-2xl"></i></a>
+                <a href="https://discord.com/owandromeda" target="_blank" class="hover:text-orange-500 transition-colors"><i class="ph-fill ph-discord-logo text-2xl"></i></a>
+            </div>
+            <p class="mt-4 text-sm" data-translate="footerRights">&copy; 2024 OW Andromeda. Todos los derechos reservados.</p>
+            <p class="mt-2 text-xs" data-translate="footerDisclaimer">Overwatch es una marca registrada de Blizzard Entertainment, Inc. Esta liga no está afiliada ni respaldada por Blizzard Entertainment.</p>
+        </div>
+    </footer>
+
+    <script>
+        // --- Lógica del menú móvil ---
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileMenuIcon = mobileMenuButton.querySelector('i');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            mobileMenuIcon.classList.toggle('ph-list');
+            mobileMenuIcon.classList.toggle('ph-x');
+        });
+        
+        const jornadasContainer = document.getElementById('jornadas-container');
+        const jornadaNav = document.getElementById('jornada-nav');
+
+        // --- Funciones de Renderizado ---
+        function createNavTab(id, text, isActive, isDisabled = false) {
+            const navButton = document.createElement('button');
+            navButton.dataset.jornada = id;
+            navButton.className = 'jornada-tab whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm transition-colors';
+            navButton.textContent = text;
+            if (isDisabled) {
+                navButton.disabled = true;
+                navButton.classList.add('border-transparent', 'text-slate-600', 'cursor-not-allowed');
+            } else if (isActive) {
+                navButton.classList.add('border-orange-500', 'text-orange-500');
+            } else {
+                navButton.classList.add('border-transparent', 'text-slate-400', 'hover:text-slate-200', 'hover:border-slate-300');
+            }
+            jornadaNav.appendChild(navButton);
+        }
+
+        function createPlaceholderContent(id, isHidden, message) {
+            const contentDiv = document.createElement('div');
+            contentDiv.id = id;
+            contentDiv.className = `jornada-content space-y-4 ${isHidden ? 'hidden' : ''}`;
+            contentDiv.innerHTML = `<p class="text-slate-400 text-center p-10">${message}</p>`;
+            jornadasContainer.appendChild(contentDiv);
+        }
+        
+        // --- Generación de contenido inicial ---
+        for (let i = 1; i <= 7; i++) {
+            const jornadaId = `jornada-${i}`;
+            createNavTab(jornadaId, `Jornada ${i}`, i === 1);
+            createPlaceholderContent(jornadaId, i > 1, 'Los partidos de esta jornada se anunciarán próximamente...');
+        }
+        
+        createNavTab('playoffs', 'Playoffs', false, true);
+        createPlaceholderContent('playoffs', true, 'Los Playoffs se revelarán al finalizar la temporada regular.');
+
+
+        // --- Lógica del selector de Jornada ---
+        jornadaNav.addEventListener('click', (e) => {
+            if (e.target.matches('.jornada-tab') && !e.target.disabled) {
+                const selectedJornadaId = e.target.dataset.jornada;
+                
+                document.querySelectorAll('.jornada-tab').forEach(tab => {
+                    if(!tab.disabled) {
+                        tab.classList.remove('border-orange-500', 'text-orange-500');
+                        tab.classList.add('border-transparent', 'text-slate-400', 'hover:text-slate-200', 'hover:border-slate-300');
+                    }
+                });
+                
+                e.target.classList.add('border-orange-500', 'text-orange-500');
+                e.target.classList.remove('border-transparent', 'text-slate-400', 'hover:text-slate-200', 'hover:border-slate-300');
+
+                document.querySelectorAll('.jornada-content').forEach(content => {
+                    content.classList.toggle('hidden', content.id !== selectedJornadaId);
+                });
+            }
+        });
+
+    </script>
+
+</body>
+</html>

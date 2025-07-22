@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clasificación - OW Andromeda</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Orbitron (títulos) e Inter (cuerpo) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
+    
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <style>
+        /* Aplicar las fuentes personalizadas a través de las clases de Tailwind */
+        .font-orbitron { font-family: 'Orbitron', sans-serif; }
+        .font-inter { font-family: 'Inter', sans-serif; }
+        
+        /* Estilo para el fondo */
+        .main-bg {
+            background-color: #0a0a0a; /* Fondo negro profundo */
+        }
+    </style>
+</head>
+<body class="bg-zinc-950 text-slate-200 font-inter">
+
+    <!-- ===== Header / Navegación ===== -->
+    <header id="header" class="bg-zinc-950/80 backdrop-blur-sm sticky top-0 left-0 w-full z-50 transition-all duration-300">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <!-- Logo -->
+            <a href="index.html" class="text-2xl font-orbitron font-bold text-white">
+                OW<span class="text-orange-500">A</span>
+            </a>
+            
+            <!-- Menú para Desktop -->
+            <div class="hidden md:flex items-center space-x-8">
+              <a href="index.html" class="hover:text-orange-500 transition-colors">Inicio</a>
+              <a href="partidos.html" class="hover:text-orange-500 transition-colors">Partidos</a>
+              <a href="mercado.html" class="hover:text-orange-500 transition-colors">Mercato</a>          
+              <a href="normativa.html" class="hover:text-orange-500 transition-colors">Normativa</a>
+            </div>
+            
+            <!-- Botón de Inscripción (Desktop) -->
+            <a href="https://www.faceit.com/es/championship/63f68d66-d67e-4a2b-a655-4ba8c18214dd/Season%2520II" target="_blank" class="hidden md:block bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-5 rounded-lg transition-all duration-300 transform hover:scale-105">
+                Inscríbete
+            </a>
+
+            <!-- Botón de Menú Móvil -->
+            <button id="mobile-menu-button" class="md:hidden text-white focus:outline-none">
+                <i class="ph-fill ph-list text-3xl"></i>
+            </button>
+        </nav>
+
+        <!-- Menú Móvil (Oculto por defecto) -->
+        <div id="mobile-menu" class="hidden md:hidden bg-zinc-900">
+            <a href="index.html" class="hover:text-orange-500 transition-colors">Inicio</a>
+              <a href="partidos.html" class="hover:text-orange-500 transition-colors">Partidos</a>
+              <a href="mercado.html" class="hover:text-orange-500 transition-colors">Mercato</a>          
+              <a href="normativa.html" class="hover:text-orange-500 transition-colors">Normativa</a>
+            <a href="https://www.faceit.com/es/championship/63f68d66-d67e-4a2b-a655-4ba8c18214dd/Season%2520II" target="_blank" class="block text-center py-4 px-4 bg-orange-500 text-white font-bold">Inscríbete</a>
+        </div>
+    </header>
+
+    <main class="main-bg pt-24 pb-20">
+        <div class="container mx-auto px-6">
+            <!-- Encabezado -->
+            <div class="text-center mb-8">
+                <h1 class="text-5xl md:text-6xl font-orbitron font-bold text-white">Clasificación General</h1>
+                <p class="mt-4 max-w-3xl mx-auto text-slate-400">
+                    Sigue la carrera por la gloria en la liga OW Andromeda.
+                </p>
+            </div>
+            
+            <!-- Leyenda -->
+            <div class="flex justify-center items-center gap-6 mb-8 text-sm">
+                <div class="flex items-center gap-2">
+                    <div class="w-2 h-2 rounded-full bg-green-500"></div>
+                    <span>Puestos de Playoffs</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <div class="w-2 h-2 rounded-full bg-red-500"></div>
+                    <span>Zona de Eliminación</span>
+                </div>
+            </div>
+
+            <!-- Clasificación General -->
+            <div class="mb-16">
+                <div class="bg-zinc-900 rounded-lg overflow-hidden shadow-lg">
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm text-left min-w-[700px]">
+                            <thead class="bg-zinc-800 text-xs text-slate-300 uppercase tracking-wider">
+                                <tr>
+                                    <th scope="col" class="px-4 py-3 w-12 text-center">Pos</th>
+                                    <th scope="col" class="px-6 py-3">Equipo</th>
+                                    <th scope="col" class="px-2 py-3 text-center">PJ</th>
+                                    <th scope="col" class="px-2 py-3 text-center">V</th>
+                                    <th scope="col" class="px-2 py-3 text-center">D</th>
+                                    <th scope="col" class="px-2 py-3 text-center">+/-</th>
+                                    <th scope="col" class="px-2 py-3 text-center font-bold">Ptos</th>
+                                    <th scope="col" class="px-6 py-3 text-center">Últimos 5</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Fila de Equipo 1 -->
+                                <tr class="border-b border-zinc-800">
+                                    <td class="px-4 py-4 font-bold text-center border-l-4 border-green-500">1</td>
+                                    <td class="px-6 py-4 font-bold text-white">
+                                        <div class="flex items-center gap-3">
+                                            <img class="w-8 h-8 rounded-full bg-zinc-700" src="https://placehold.co/40x40/27272a/9ca3af?text=?" alt="Logo Equipo">
+                                            Equipo 1
+                                        </div>
+                                    </td>
+                                    <td class="px-2 py-4 text-center">0</td>
+                                    <td class="px-2 py-4 text-center">0</td>
+                                    <td class="px-2 py-4 text-center">0</td>
+                                    <td class="px-2 py-4 text-center text-slate-400">0</td>
+                                    <td class="px-2 py-4 text-center font-bold text-white">0</td>
+                                    <td class="px-6 py-4 text-center">
+                                        <div class="flex justify-center gap-1.5">
+                                            <span class="w-5 h-5 rounded-full bg-zinc-700" title="No jugado"></span>
+                                            <span class="w-5 h-5 rounded-full bg-zinc-700" title="No jugado"></span>
+                                            <span class="w-5 h-5 rounded-full bg-zinc-700" title="No jugado"></span>
+                                            <span class="w-5 h-5 rounded-full bg-zinc-700" title="No jugado"></span>
+                                            <span class="w-5 h-5 rounded-full bg-zinc-700" title="No jugado"></span>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <!-- Fila de Equipo 2 -->
+                                <tr class="bg-zinc-800/30 border-b border-zinc-800">
+                                    <td class="px-4 py-4 font-bold text-center border-l-4 border-green-500">2</td>
+                                    <td class="px-6 py-4 font-bold text-white">
+                                        <div class="flex items-center gap-3">
+                                            <img class="w-8 h-8 rounded-full bg-zinc-700" src="https://placehold.co/40x40/27272a/9ca3af?text=?" alt="Logo Equipo">
+                                            Equipo 2
+                                        </div>
+                                    </td>
+                                    <td class="px-2 py-4 text-center">0</td>
+                                    <td class="px-2 py-4 text-center">0</td>
+                                    <td class="px-2 py-4 text-center">0</td>
+                                    <td class="px-2 py-4 text-center text-slate-400">0</td>
+                                    <td class="px-2 py-4 text-center font-bold text-white">0</td>
+                                    <td class="px-6 py-4 text-center">
+                                        <div class="flex justify-center gap-1.5">
+                                            <span class="w-5 h-5 rounded-full bg-zinc-700" title="No jugado"></span>
+                                            <span class="w-5 h-5 rounded-full bg-zinc-700" title="No jugado"></span>
+                                            <span class="w-5 h-5 rounded-full bg-zinc-700" title="No jugado"></span>
+                                            <span class="w-5 h-5 rounded-full bg-zinc-700" title="No jugado"></span>
+                                            <span class="w-5 h-5 rounded-full bg-zinc-700" title="No jugado"></span>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <!-- Fila de Equipo 3 -->
+                                <tr class="border-b border-zinc-800">
+                                    <td class="px-4 py-4 font-bold text-center border-l-4 border-green-500">3</td>
+                                    <td class="px-6 py-4 font-bold text-white">
+                                        <div class="flex items-center gap-3">
+                                            <img class="w-8 h-8 rounded-full bg-zinc-700" src="https://placehold.co/40x40/27272a/9ca3af?text=?" alt="Logo Equipo">
+                                            Equipo 3
+                                        </div>
+                                    </td>
+                                    <td class="px-2 py-4 text-center">0</td>
+                                    <td class="px-2 py-4 text-center">0</td>
+                                    <td class="px-2 py-4 text-center">0</td>
+                                    <td class="px-2 py-4 text-center text-slate-400">0</td>
+                                    <td class="px-2 py-4 text-center font-bold text-white">0</td>
+                                    <td class="px-6 py-4 text-center">
+                                        <div class="flex justify-center gap-1.5">
+                                            <span class="w-5 h-5 rounded-full bg-zinc-700" title="No jugado"></span>
+                                            <span class="w-5 h-5 rounded-full bg-zinc-700" title="No jugado"></span>
+                                            <span class="w-5 h-5 rounded-full bg-zinc-700" title="No jugado"></span>
+                                            <span class="w-5 h-5 rounded-full bg-zinc-700" title="No jugado"></span>
+                                            <span class="w-5 h-5 rounded-full bg-zinc-700" title="No jugado"></span>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <!-- Fila de Equipo 4 -->
+                                <tr class="bg-zinc-800/30 border-b border-zinc-800">
+                                    <td class="px-4 py-4 font-bold text-center border-l-4 border-green-500">4</td>
+                                    <td class="px-6 py-4 font-bold text-white">
+                                        <div class="flex items-center gap-3">
+                                            <img class="w-8 h-8 rounded-full bg-zinc-700" src="https://placehold.co/40x40/27272a/9ca3af?text=?" alt="Logo Equipo">
+                                            Equipo 4
+                                        </div>
+                                    </td>
+                                    <td class="px-2 py-4 text-center">0</td>
+                                    <td class="px-2 py-4 text-center">0</td>
+                                    <td class="px-2 py-4 text-center">0</td>
+                                    <td class="px-2 py-4 text-center text-slate-400">0</td>
+                                    <td class="px-2 py-4 text-center font-bold text-white">0</td>
+                                    <td class="px-6 py-4 text-center">
+                                        <div class="flex justify-center gap-1.5">
+                                            <span class="w-5 h-5 rounded-full bg-zinc-700" title="No jugado"></span>
+                                            <span class="w-5 h-5 rounded-full bg-zinc-700" title="No jugado"></span>
+                                            <span class="w-5 h-5 rounded-full bg-zinc-700" title="No jugado"></span>
+                                            <span class="w-5 h-5 rounded-full bg-zinc-700" title="No jugado"></span>
+                                            <span class="w-5 h-5 rounded-full bg-zinc-700" title="No jugado"></span>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <!-- Fila de Equipo 5 -->
+                                <tr class="border-b border-zinc-800">
+                                    <td class="px-4 py-4 font-bold text-center border-l-4 border-transparent">5</td>
+                                    <td class="px-6 py-4 font-bold text-white">
+                                        <div class="flex items-center gap-3">
+                                            <img class="w-8 h-8 rounded-full bg-zinc-700" src="https://placehold.co/40x40/27272a/9ca3af?text=?" alt="Logo Equipo">
+                                            Equipo 5
+                                        </div>
+                                    </td>
+                                    <td class="px-2 py-4 text-center">0</td>
+                                    <td class="px-2 py-4 text-center">0</td>
+                                    <td class="px-2 py-4 text-center">0</td>
+                                    <td class="px-2 py-4 text-center text-slate-400">0</td>
+                                    <td class="px-2 py-4 text-center font-bold text-white">0</td>
+                                    <td class="px-6 py-4 text-center">
+                                        <div class="flex justify-center gap-1.5">
+                                            <span class="w-5 h-5 rounded-full bg-zinc-700" title="No jugado"></span>
+                                            <span class="w-5 h-5 rounded-full bg-zinc-700" title="No jugado"></span>
+                                            <span class="w-5 h-5 rounded-full bg-zinc-700" title="No jugado"></span>
+                                            <span class="w-5 h-5 rounded-full bg-zinc-700" title="No jugado"></span>
+                                            <span class="w-5 h-5 rounded-full bg-zinc-700" title="No jugado"></span>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <!-- Fila de Equipo 6 -->
+                                <tr class="bg-zinc-800/30 border-b border-zinc-800">
+                                    <td class="px-4 py-4 font-bold text-center border-l-4 border-transparent">6</td>
+                                    <td class="px-6 py-4 font-bold text-white">
+                                        <div class="flex items-center gap-3">
+                                            <img class="w-8 h-8 rounded-full bg-zinc-700" src="https://placehold.co/40x40/27272a/9ca3af?text=?" alt="Logo Equipo">
+                                            Equipo 6
+                                        </div>
+                                    </td>
+                                    <td class="px-2 py-4 text-center">0</td>
+                                    <td class="px-2 py-4 text-center">0</td>
+                                    <td class="px-2 py-4 text-center">0</td>
+                                    <td class="px-2 py-4 text-center text-slate-400">0</td>
+                                    <td class="px-2 py-4 text-center font-bold text-white">0</td>
+                                    <td class="px-6 py-4 text-center">
+                                        <div class="flex justify-center gap-1.5">
+                                            <span class="w-5 h-5 rounded-full bg-zinc-700" title="No jugado"></span>
+                                            <span class="w-5 h-5 rounded-full bg-zinc-700" title="No jugado"></span>
+                                            <span class="w-5 h-5 rounded-full bg-zinc-700" title="No jugado"></span>
+                                            <span class="w-5 h-5 rounded-full bg-zinc-700" title="No jugado"></span>
+                                            <span class="w-5 h-5 rounded-full bg-zinc-700" title="No jugado"></span>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <!-- Fila de Equipo 7 -->
+                                <tr class="border-b border-zinc-800">
+                                    <td class="px-4 py-4 font-bold text-center border-l-4 border-red-500">7</td>
+                                    <td class="px-6 py-4 font-bold text-white">
+                                        <div class="flex items-center gap-3">
+                                            <img class="w-8 h-8 rounded-full bg-zinc-700" src="https://placehold.co/40x40/27272a/9ca3af?text=?" alt="Logo Equipo">
+                                            Equipo 7
+                                        </div>
+                                    </td>
+                                    <td class="px-2 py-4 text-center">0</td>
+                                    <td class="px-2 py-4 text-center">0</td>
+                                    <td class="px-2 py-4 text-center">0</td>
+                                    <td class="px-2 py-4 text-center text-slate-400">0</td>
+                                    <td class="px-2 py-4 text-center font-bold text-white">0</td>
+                                    <td class="px-6 py-4 text-center">
+                                        <div class="flex justify-center gap-1.5">
+                                            <span class="w-5 h-5 rounded-full bg-zinc-700" title="No jugado"></span>
+                                            <span class="w-5 h-5 rounded-full bg-zinc-700" title="No jugado"></span>
+                                            <span class="w-5 h-5 rounded-full bg-zinc-700" title="No jugado"></span>
+                                            <span class="w-5 h-5 rounded-full bg-zinc-700" title="No jugado"></span>
+                                            <span class="w-5 h-5 rounded-full bg-zinc-700" title="No jugado"></span>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <!-- Fila de Equipo 8 -->
+                                <tr class="bg-zinc-800/30">
+                                    <td class="px-4 py-4 font-bold text-center border-l-4 border-red-500">8</td>
+                                    <td class="px-6 py-4 font-bold text-white">
+                                        <div class="flex items-center gap-3">
+                                            <img class="w-8 h-8 rounded-full bg-zinc-700" src="https://placehold.co/40x40/27272a/9ca3af?text=?" alt="Logo Equipo">
+                                            Equipo 8
+                                        </div>
+                                    </td>
+                                    <td class="px-2 py-4 text-center">0</td>
+                                    <td class="px-2 py-4 text-center">0</td>
+                                    <td class="px-2 py-4 text-center">0</td>
+                                    <td class="px-2 py-4 text-center text-slate-400">0</td>
+                                    <td class="px-2 py-4 text-center font-bold text-white">0</td>
+                                    <td class="px-6 py-4 text-center">
+                                        <div class="flex justify-center gap-1.5">
+                                            <span class="w-5 h-5 rounded-full bg-zinc-700" title="No jugado"></span>
+                                            <span class="w-5 h-5 rounded-full bg-zinc-700" title="No jugado"></span>
+                                            <span class="w-5 h-5 rounded-full bg-zinc-700" title="No jugado"></span>
+                                            <span class="w-5 h-5 rounded-full bg-zinc-700" title="No jugado"></span>
+                                            <span class="w-5 h-5 rounded-full bg-zinc-700" title="No jugado"></span>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- ===== Footer ===== -->
+    <footer class="bg-black py-10">
+        <div class="container mx-auto px-6 text-center text-slate-500">
+            <!-- NUEVA SECCIÓN: Patrocinadores -->
+            <div class="mb-10">
+                <h3 class="text-sm uppercase tracking-widest text-slate-400 mb-6" data-translate="sponsorsTitle">Nuestros patrocinadores</h3>
+                <div class="flex justify-center items-center gap-8 opacity-60">
+                    <img src="assets/img/FACEIT.png" alt="FACEIT Logo" class="h-8 filter grayscale hover:grayscale-0 transition-all duration-300">
+                </div>
+            </div>
+            <div class="flex justify-center space-x-6 mt-6">
+                <a href="https://twitter.com/OWAndromedaes" target="_blank" class="hover:text-orange-500 transition-colors"><i class="ph-fill ph-twitter-logo text-2xl"></i></a>
+                <a href="https://www.twitch.tv/owandromedaes" target="_blank" class="hover:text-orange-500 transition-colors"><i class="ph-fill ph-twitch-logo text-2xl"></i></a>
+                <a href="https://discord.com/owandromeda" target="_blank" class="hover:text-orange-500 transition-colors"><i class="ph-fill ph-discord-logo text-2xl"></i></a>
+            </div>
+            <p class="mt-4 text-sm" data-translate="footerRights">&copy; 2024 OW Andromeda. Todos los derechos reservados.</p>
+            <p class="mt-2 text-xs" data-translate="footerDisclaimer">Overwatch es una marca registrada de Blizzard Entertainment, Inc. Esta liga no está afiliada ni respaldada por Blizzard Entertainment.</p>
+        </div>
+    </footer>
+
+    <script>
+        // --- Lógica del menú móvil ---
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileMenuIcon = mobileMenuButton.querySelector('i');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            mobileMenuIcon.classList.toggle('ph-list');
+            mobileMenuIcon.classList.toggle('ph-x');
+        });
+    </script>
+
+</body>
+</html>

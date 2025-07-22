@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OW Andromeda</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Orbitron (títulos) e Inter (cuerpo) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
+    
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <style>
+        /* Aplicar las fuentes personalizadas a través de las clases de Tailwind */
+        .font-orbitron { font-family: 'Orbitron', sans-serif; }
+        .font-inter { font-family: 'Inter', sans-serif; }
+        
+        /* Estilo para el fondo del Hero Section con la nueva imagen */
+        .hero-bg {
+            background-image: url('./assets/img/website_background.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            box-shadow: inset 0 0 0 1000px rgba(16, 16, 16, 0.4); /* Sombra oscura para el fondo */ 
+        }
+
+        /* Animación de pulso para el botón principal con el nuevo color naranja */
+        @keyframes pulse-glow {
+            0%, 100% {
+                box-shadow: 0 0 12px #f97316, 0 0 24px #f97316;
+            }
+            50% {
+                box-shadow: 0 0 24px #f97316, 0 0 48px #f97316;
+            }
+        }
+        .cta-pulse {
+            animation: pulse-glow 3s infinite ease-in-out;
+        }
+
+        /* Animación de spinner para cargas */
+        .spinner {
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-top-color: #f97316; /* Naranja */
+            border-radius: 50%;
+            width: 16px;
+            height: 16px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Estilos para el acordeón de FAQ */
+        .faq-question.active .faq-arrow {
+            transform: rotate(180deg);
+        }
+    </style>
+</head>
+<body class="bg-zinc-950 text-slate-200 font-inter">
+
+    <!-- ===== Header / Navegación ===== -->
+    <header id="header" class="bg-zinc-950/80 backdrop-blur-sm fixed top-0 left-0 w-full z-50 transition-all duration-300">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <!-- Logo -->
+            <a href="#" class="text-2xl font-orbitron font-bold text-white">
+                OW<span class="text-orange-500">A</span>
+            </a>
+            
+            <!-- Menú para Desktop -->
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="partidos.html" class="hover:text-orange-500 transition-colors">Partidos</a>
+                <a href="clasificacion.html" class="hover:text-orange-500 transition-colors">Clasificación</a>
+                <a href="mercado.html" class="hover:text-orange-500 transition-colors">Mercato</a>                
+                <a href="normativa.html" class="hover:text-orange-500 transition-colors">Normativa</a>
+                <a href="#faq" class="hover:text-orange-500 transition-colors">FAQ</a>
+            </div>
+            
+            <div class="flex items-center gap-4">
+                <!-- Botón de Twitch (Reemplaza al de Inscripción) -->
+                <a href="https://www.twitch.tv/owandromedaes" target="_blank" id="twitch-live-btn" class="hidden md:flex items-center gap-2 bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded-lg transition-all duration-300 transform hover:scale-105">
+                    <span class="relative flex h-3 w-3">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-3 w-3 bg-red-500"></span>
+                    </span>
+                    <span data-translate="navLive">En directo</span>
+                </a>
+            </div>
+
+            <!-- Botón de Menú Móvil -->
+            <button id="mobile-menu-button" class="md:hidden text-white focus:outline-none">
+                <i class="ph-fill ph-list text-3xl"></i>
+            </button>
+        </nav>
+
+        <!-- Menú Móvil (Oculto por defecto) -->
+        <div id="mobile-menu" class="hidden md:hidden bg-zinc-900">
+            <a href="partidos.html" class="hover:text-orange-500 transition-colors">Partidos</a>
+            <a href="clasificacion.html" class="hover:text-orange-500 transition-colors">Clasificación</a>
+            <a href="mercado.html" class="hover:text-orange-500 transition-colors">Mercato</a>                
+            <a href="normativa.html" class="hover:text-orange-500 transition-colors">Normativa</a>
+            <a href="#faq" class="hover:text-orange-500 transition-colors">FAQ</a>
+            <a href="https://www.faceit.com/es/championship/63f68d66-d67e-4a2b-a655-4ba8c18214dd/Season%2520II" target="_blank" class="block text-center py-4 px-4 bg-orange-500 text-white font-bold">Inscríbete</a>
+        </div>
+    </header>
+
+    <main>
+        <!-- ===== Hero Section ===== -->
+        <section class="hero-bg min-h-screen flex items-center justify-center pt-20">
+            <div class="container mx-auto px-6 text-center">
+                <h1 class="text-5xl md:text-7xl lg:text-8xl font-orbitron font-extrabold text-white uppercase tracking-wider">
+                    OW <span class="text-orange-500">ANDROMEDA</span>
+                </h1>
+                <p class="mt-6 text-lg md:text-xl max-w-3xl mx-auto text-slate-300">
+                    La liga amateur de Overwatch 2 que estabas esperando. Compite, mejora y forma parte de algo grande. Patrocinado por FACEIT.
+                </p>
+                <div class="mt-10">
+                    <a href="https://www.faceit.com/es/championship/63f68d66-d67e-4a2b-a655-4ba8c18214dd/Season%2520II" target="_blank" class="cta-pulse inline-block bg-orange-500 hover:bg-orange-600 text-white font-bold text-lg py-4 px-10 rounded-lg transition-all duration-300 transform hover:scale-105">
+                        ¡INSCRÍBETE AHORA! 🫧
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== Sección ¿Qué es OW Andromeda? ===== -->
+        <section id="about" class="py-20 sm:py-32 bg-zinc-900">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl md:text-4xl font-orbitron font-bold text-white">Bienvenido a la OW Andromeda</h2>
+                    <p class="mt-4 max-w-2xl mx-auto text-slate-400">OW Andromeda es el punto de encuentro para la comunidad hispanohablante de Overwatch.</p>
+                </div>
+                <div class="grid md:grid-cols-3 gap-10">
+                    <!-- Feature 1 -->
+                    <div class="bg-zinc-800/50 p-8 rounded-xl text-center border border-zinc-700 hover:border-orange-500 transition-colors duration-300 transform hover:-translate-y-2">
+                        <i class="ph-fill ph-star-four text-5xl text-orange-500 mx-auto mb-4"></i>
+                        <h3 class="text-xl font-bold font-orbitron text-white">+1000€ en premios</h3>
+                        <p class="mt-2 text-slate-400">Para equipos que buscan la máxima competición y demostrar que son los mejores de la galaxia.</p>
+                    </div>
+                    <!-- Feature 2 -->
+                    <div class="bg-zinc-800/50 p-8 rounded-xl text-center border border-zinc-700 hover:border-orange-500 transition-colors duration-300 transform hover:-translate-y-2">
+                        <i class="ph-fill ph-planet text-5xl text-orange-500 mx-auto mb-4"></i>
+                        <h3 class="text-xl font-bold font-orbitron text-white">Difusión total</h3>
+                        <p class="mt-2 text-slate-400">Un espacio para equipos que quieren competir en un ambiente más relajado, aprender y divertirse.</p>
+                    </div>
+                    <!-- Feature 3 -->
+                    <div class="bg-zinc-800/50 p-8 rounded-xl text-center border border-zinc-700 hover:border-orange-500 transition-colors duration-300 transform hover:-translate-y-2">
+                        <i class="ph-fill ph-users-three text-5xl text-orange-500 mx-auto mb-4"></i>
+                        <h3 class="text-xl font-bold font-orbitron text-white">Comunidad Activa</h3>
+                        <p class="mt-2 text-slate-400">Únete a nuestro servidor de Discord para encontrar equipo, seguir resultados y conectar con otros jugadores.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== Sección Formato y Calendario ===== -->
+        <section id="format" class="py-20 sm:py-32 bg-zinc-950">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl md:text-4xl font-orbitron font-bold text-white">Organigrama de OWA</h2>
+                    <p class="mt-4 max-w-2xl mx-auto text-slate-400">Sigue las fases de la liga y prepárate para la acción.</p>
+                </div>
+                <!-- Timeline -->
+                <div class="relative max-w-4xl mx-auto">
+                    <!-- Línea vertical -->
+                    <div class="absolute left-1/2 -translate-x-1/2 md:left-1/2 h-full w-0.5 bg-zinc-700"></div>
+                    <!-- Item 1 -->
+                    <div class="relative mb-8 flex justify-between items-center w-full">
+                        <div class="md:order-1 md:w-5/12"></div>
+                        <div class="z-20 flex items-center order-1 bg-orange-500 shadow-xl w-20 h-20 rounded-full">
+                            <h1 class="mx-auto font-bold text-lg text-white">01/08</h1>
+                        </div>
+                        <div class="order-1 bg-zinc-900 rounded-lg shadow-xl w-full md:w-5/12 px-6 py-4">
+                            <h3 class="font-bold text-white text-xl">Inscripciones</h3>
+                            <p class="text-sm font-medium leading-snug tracking-wide text-slate-400">Abrimos la fase de registro para todos los equipos.</p>
+                        </div>
+                    </div>
+                    <!-- Item 2 -->
+                    <div class="relative mb-8 flex justify-between flex-row-reverse items-center w-full">
+                        <div class="md:order-1 md:w-5/12"></div>
+                        <div class="z-20 flex items-center order-1 bg-orange-500 shadow-xl w-20 h-20 rounded-full">
+                            <h1 class="mx-auto font-bold text-lg text-white">01/09</h1>
+                        </div>
+                        <div class="order-1 bg-zinc-900 rounded-lg shadow-xl w-full md:w-5/12 px-6 py-4">
+                            <h3 class="font-bold text-white text-xl">Cierre inscripciones</h3>
+                            <p class="text-sm font-medium leading-snug tracking-wide text-slate-400">Cerramos la fase de registro para todos los equipos.</p>
+                        </div>
+                    </div>
+                    <!-- Item 3 -->
+                    <div class="relative mb-8 flex justify-between items-center w-full">
+                        <div class="md:order-1 md:w-5/12"></div>
+                        <div class="z-20 flex items-center order-1 bg-orange-500 shadow-xl w-20 h-20 rounded-full">
+                            <h1 class="mx-auto text-white font-bold text-lg">20/09</h1>
+                        </div>
+                        <div class="order-1 bg-zinc-900 rounded-lg shadow-xl w-full md:w-5/12 px-6 py-4">
+                            <h3 class="font-bold text-white text-xl">Fase de Grupos</h3>
+                            <p class="text-sm font-medium leading-snug tracking-wide text-slate-400">Da comienzo la liga y los equipos compiten en formato de liga suiza.</p>
+                        </div>
+                    </div>
+                    <!-- Item 4 -->
+                    <div class="relative mb-8 flex justify-between flex-row-reverse items-center w-full">
+                        <div class="md:order-1 md:w-5/12"></div>
+                        <div class="z-20 flex items-center order-1 bg-orange-500 shadow-xl w-20 h-20 rounded-full">
+                            <h1 class="mx-auto text-white font-bold text-lg">03/10</h1>
+                        </div>
+                        <div class="order-1 bg-zinc-900 rounded-lg shadow-xl w-full md:w-5/12 px-6 py-4">
+                            <h3 class="font-bold text-white text-xl">Playoffs</h3>
+                            <p class="text-sm font-medium leading-snug tracking-wide text-slate-400">Los mejores equipos avanzan a la fase de eliminación.</p>
+                        </div>
+                    </div>
+                     <!-- Item 5 -->
+                    <div class="relative mb-8 flex justify-between items-center w-full">
+                        <div class="md:order-1 md:w-5/12"></div>
+                        <div class="z-20 flex items-center order-1 bg-orange-500 shadow-xl w-20 h-20 rounded-full">
+                            <h1 class="mx-auto text-white font-bold text-lg">05/10</h1>
+                        </div>
+                        <div class="order-1 bg-zinc-900 rounded-lg shadow-xl w-full md:w-5/12 px-6 py-4">
+                            <h3 class="font-bold text-white text-xl">Gran Final</h3>
+                            <p class="text-sm font-medium leading-snug tracking-wide text-slate-400">La batalla final por el título de campeón.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== Sección Equipos & Gemini Name Generator ===== -->
+        <section id="teams" class="py-20 sm:py-32 bg-zinc-900">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl md:text-4xl font-orbitron font-bold text-white">Participantes</h2>
+                    <p class="mt-4 max-w-2xl mx-auto text-slate-400">Estos son los equipos que competirán por la gloria en la Season 2. <br>¡Añade el tuyo a la lista!</p>
+                </div>
+                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-8 gap-12">
+                    <!-- Logos de equipos (placeholders) -->
+                    <div class="bg-zinc-800 p-4 rounded-lg flex items-center justify-center aspect-square transition-transform duration-300 hover:scale-110 hover:bg-zinc-700">
+                        <img src="https://placehold.co/150x150/f97316/white?text=OWA" alt="Logo de Equipo" class="max-h-24 opacity-60">
+                    </div>
+                    <div class="bg-zinc-800 p-4 rounded-lg flex items-center justify-center aspect-square transition-transform duration-300 hover:scale-110 hover:bg-zinc-700">
+                        <img src="https://placehold.co/150x150/f97316/white?text=OWA" alt="Logo de Equipo" class="max-h-24 opacity-60">
+                    </div>
+                    <div class="bg-zinc-800 p-4 rounded-lg flex items-center justify-center aspect-square transition-transform duration-300 hover:scale-110 hover:bg-zinc-700">
+                        <img src="https://placehold.co/150x150/f97316/white?text=OWA" alt="Logo de Equipo" class="max-h-24 opacity-60">
+                    </div>
+                    <div class="bg-zinc-800 p-4 rounded-lg flex items-center justify-center aspect-square transition-transform duration-300 hover:scale-110 hover:bg-zinc-700">
+                        <img src="https://placehold.co/150x150/f97316/white?text=OWA" alt="Logo de Equipo" class="max-h-24 opacity-60">
+                    </div>
+                    <div class="bg-zinc-800 p-4 rounded-lg flex items-center justify-center aspect-square transition-transform duration-300 hover:scale-110 hover:bg-zinc-700">
+                        <img src="https://placehold.co/150x150/f97316/white?text=OWA" alt="Logo de Equipo" class="max-h-24 opacity-60">
+                    </div>
+                    <div class="bg-zinc-800 p-4 rounded-lg flex items-center justify-center aspect-square transition-transform duration-300 hover:scale-110 hover:bg-zinc-700">
+                        <img src="https://placehold.co/150x150/f97316/white?text=OWA" alt="Logo de Equipo" class="max-h-24 opacity-60">
+                    </div>
+                    <div class="bg-zinc-800 p-4 rounded-lg flex items-center justify-center aspect-square transition-transform duration-300 hover:scale-110 hover:bg-zinc-700">
+                        <img src="https://placehold.co/150x150/f97316/white?text=OWA" alt="Logo de Equipo" class="max-h-24 opacity-60">
+                    </div>
+                    <div class="bg-zinc-800 p-4 rounded-lg flex items-center justify-center aspect-square transition-transform duration-300 hover:scale-110 hover:bg-zinc-700">
+                        <img src="https://placehold.co/150x150/f97316/white?text=OWA" alt="Logo de Equipo" class="max-h-24 opacity-60">
+                    </div>
+                </div>
+
+                <!-- Gemini Name Generator -->
+                <div class="mt-24 max-w-2xl mx-auto bg-zinc-900/50 border border-zinc-800 rounded-xl p-8 text-center">
+                    <h3 class="text-2xl font-orbitron font-bold text-white">¿Necesitas un nombre?</h3>
+                    <p class="mt-2 text-slate-400">Usa nuestro generador de nombres galácticos para encontrar la identidad perfecta para tu equipo.</p>
+                    <div class="mt-6 flex flex-col sm:flex-row gap-4">
+                        <input id="name-keyword" type="text" placeholder="Palabra clave (opcional)" class="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-orange-500">
+                        <button id="generate-name-btn" class="w-full sm:w-auto flex items-center justify-center gap-2 bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-6 rounded-lg transition-colors">
+                            <span id="generate-name-btn-text">✨ Generar</span>
+                            <div id="generate-name-spinner" class="spinner hidden"></div>
+                        </button>
+                    </div>
+                    <div id="generated-name-container" class="mt-6 p-4 bg-zinc-800 rounded-lg min-h-[60px] flex items-center justify-center hidden">
+                        <p id="generated-name-text" class="text-xl font-bold text-orange-500"></p>
+                        <button id="copy-name-btn" class="ml-4 text-slate-400 hover:text-white">
+                            <i class="ph-fill ph-copy text-xl"></i>
+                        </button>
+                    </div>
+                    <div id="copy-name-feedback" class="mt-2 text-sm text-green-400 hidden">¡Nombre copiado!</div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- ===== NUEVA SECCIÓN:  MVPs de la Semana ===== -->
+        <section id="players" class="py-20 sm:py-32 bg-zinc-950">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl md:text-4xl font-orbitron font-bold text-white">💥 OWA S1 CHAMPIONS 🤬</h2>
+                    <p class="mt-4 max-w-2xl mx-auto text-slate-400">Conoce el equipo que consiguió llevarse el campeonato de la Season 1.</p>
+                </div>
+                <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <!-- Player Card -->
+                    <div class="bg-zinc-900 rounded-lg overflow-hidden group transform transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-orange-500/20">
+                        <div class="h-40 bg-cover bg-center" style="background-image: url('./assets/img/website_background_mobile.png')"></div>
+                        <div class="p-6">
+                            <h3 class="text-2xl font-orbitron font-bold text-white text-center">Akaa</h3>
+                        </div>
+                    </div>
+                    <!-- Player Card -->
+                    <div class="bg-zinc-900 rounded-lg overflow-hidden group transform transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-orange-500/20">
+                        <div class="h-40 bg-cover bg-center" style="background-image: url('./assets/img/website_background_mobile.png')"></div>
+                        <div class="p-6">
+                            <h3 class="text-2xl font-orbitron font-bold text-white text-center">BroPlaYer</h3>
+                        </div>
+                    </div>
+                    <!-- Player Card -->
+                    <div class="bg-zinc-900 rounded-lg overflow-hidden group transform transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-orange-500/20">
+                        <div class="h-40 bg-cover bg-center" style="background-image: url('./assets/img/website_background_mobile.png')"></div>
+                        <div class="p-6">
+                            <h3 class="text-2xl font-orbitron font-bold text-white text-center">khenail</h3>
+                        </div>
+                    </div>
+                    <!-- Player Card -->
+                    <div class="bg-zinc-900 rounded-lg overflow-hidden group transform transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-orange-500/20">
+                        <div class="h-40 bg-cover bg-center" style="background-image: url('./assets/img/website_background_mobile.png')"></div>
+                        <div class="p-6">
+                            <h3 class="text-2xl font-orbitron font-bold text-white text-center">loren</h3>
+                        </div>
+                    </div>
+                    <!-- Player Card -->
+                    <div class="bg-zinc-900 rounded-lg overflow-hidden group transform transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-orange-500/20">
+                        <div class="h-40 bg-cover bg-center" style="background-image: url('./assets/img/website_background_mobile.png')"></div>
+                        <div class="p-6">
+                            <h3 class="text-2xl font-orbitron font-bold text-white text-center">alba</h3>
+                        </div>
+                    </div>
+                    <!-- Player Card -->
+                    <div class="bg-zinc-900 rounded-lg overflow-hidden group transform transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-orange-500/20">
+                        <div class="h-40 bg-cover bg-center" style="background-image: url('./assets/img/website_background_mobile.png')"></div>
+                        <div class="p-6">
+                            <h3 class="text-2xl font-orbitron font-bold text-white text-center">santy</h3>
+                        </div>
+                    </div>
+                    <!-- Player Card -->
+                    <div class="bg-zinc-900 rounded-lg overflow-hidden group transform transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-orange-500/20">
+                        <div class="h-40 bg-cover bg-center" style="background-image: url('./assets/img/website_background_mobile.png')"></div>
+                        <div class="p-6">
+                            <h3 class="text-2xl font-orbitron font-bold text-white text-center">xzodyal</h3>
+                        </div>
+                    </div>
+                    <!-- Player Card -->
+                    <div class="bg-zinc-900 rounded-lg overflow-hidden group transform transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-orange-500/20">
+                        <div class="h-40 bg-cover bg-center" style="background-image: url('./assets/img/website_background_mobile.png')"></div>
+                        <div class="p-6">
+                            <h3 class="text-2xl font-orbitron font-bold text-white text-center">yoham</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ===== NUEVA SECCIÓN: Galería de Clips ===== -->
+        <section id="clips" class="py-20 sm:py-32 bg-zinc-900">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl md:text-4xl font-orbitron font-bold text-white">Contenido de calidad</h2>
+                    <p class="mt-4 max-w-2xl mx-auto text-slate-400">Revive los momentos más espectaculares de la Season 1.</p>
+                </div>
+                <div class="grid lg:grid-cols-2 gap-8">
+                    <!-- Clip Principal -->
+                    <div class="aspect-video">
+                        <iframe class="w-full h-full rounded-lg shadow-lg" src="https://www.youtube.com/embed/eID89VLYy08?si=WG2llQNypscPRQ6s" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <div class="aspect-video">
+                        <iframe class="w-full h-full rounded-lg shadow-lg" src="https://www.youtube.com/embed/xKeJbGJxygc?si=zANH3P86A5dQVkEH" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                     </div>
+                     <div class="aspect-video">
+                        <iframe class="w-full h-full rounded-lg shadow-lg" src="https://www.youtube.com/embed/qI57513Uzi4?si=30O_R0gUYmR5tdjx" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                     </div>
+                     <div class="aspect-video">
+                        <iframe class="w-full h-full rounded-lg shadow-lg" src="https://www.youtube.com/embed/F-VYzmtxI8w?si=f5cw_dMZFqgIgKey" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                     </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== NUEVA SECCIÓN: FAQ ===== -->
+        <section id="faq" class="py-20 sm:py-32 bg-zinc-950">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl md:text-4xl font-orbitron font-bold text-white">Preguntas Frecuentes</h2>
+                    <p class="mt-4 max-w-2xl mx-auto text-slate-400">¿Tienes dudas? Aquí resolvemos las más comunes de OWA.</p>
+                </div>
+                <div class="max-w-3xl mx-auto space-y-4">
+                    <!-- FAQ Item 1 -->
+                    <div class="bg-zinc-800 rounded-lg">
+                        <h2>
+                            <button type="button" class="faq-question flex items-center justify-between w-full p-6 font-semibold text-left text-white">
+                                <span>¿Cuál es el nivel de habilidad requerido?</span>
+                                <i class="ph-fill ph-caret-down text-xl faq-arrow transition-transform"></i>
+                            </button>
+                        </h2>
+                        <div class="faq-answer hidden p-6 pt-0 text-slate-400">
+                            <p>¡Todos los niveles son bienvenidos! El objetivo es que TODOS puedan competir y divertirse.</p>
+                        </div>
+                    </div>
+                    <!-- FAQ Item 2 -->
+                    <div class="bg-zinc-800 rounded-lg">
+                        <h2>
+                            <button type="button" class="faq-question flex items-center justify-between w-full p-6 font-semibold text-left text-white">
+                                <span>¿Cómo me inscribo si no tengo equipo?</span>
+                                <i class="ph-fill ph-caret-down text-xl faq-arrow transition-transform"></i>
+                            </button>
+                        </h2>
+                        <div class="faq-answer hidden p-6 pt-0 text-slate-400">
+                            <p>¡No hay problema! Nuestro servidor de Discord tiene un canal de #busco-equipo donde podrás conectar con otros agentes libres y formar una escuadra para conquistar la galaxia. (Encontrarás el enlace de discord abajo en la página web)</p>
+                        </div>
+                    </div>
+                    <!-- FAQ Item 3 -->
+                    <div class="bg-zinc-800 rounded-lg">
+                        <h2>
+                            <button type="button" class="faq-question flex items-center justify-between w-full p-6 font-semibold text-left text-white">
+                                <span>¿Dónde puedo ver las partidas?</span>
+                                <i class="ph-fill ph-caret-down text-xl faq-arrow transition-transform"></i>
+                            </button>
+                        </h2>
+                        <div class="faq-answer hidden p-6 pt-0 text-slate-400">
+                            <p>Todas las partidas destacadas, playoffs y la gran final se retransmiten en vivo en nuestro canal oficial de Twitch: <a href="https://www.twitch.tv/owandromedaes" target="_blank" class="text-orange-500 hover:underline">twitch.tv/owandromeda</a>. ¡No te olvides de seguirnos!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== Sección Comunidad y CTA Final ===== -->
+        <section id="community" class="py-20 sm:py-32 hero-bg">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="text-3xl md:text-4xl font-orbitron font-bold text-white">Conecta con la comunidad</h2>
+                <p class="mt-4 max-w-2xl mx-auto text-slate-400">No te pierdas ninguna actualización. Únete a nuestras redes y sé parte de la comunidad.</p>
+                <div class="flex flex-col sm:flex-row justify-center items-center gap-6 mt-10">
+                    <a href="https://discord.com/owandromeda" target="_blank" class="w-full sm:w-auto flex items-center justify-center gap-3 bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-4 px-8 rounded-lg transition-all duration-300 transform hover:scale-105">
+                        <i class="ph-fill ph-discord-logo text-2xl"></i> Únete a Discord
+                    </a>
+                    <a href="https://www.twitch.tv/owandromedaes" target="_blank" class="w-full sm:w-auto flex items-center justify-center gap-3 bg-purple-600 hover:bg-purple-500 text-white font-bold py-4 px-8 rounded-lg transition-all duration-300 transform hover:scale-105">
+                        <i class="ph-fill ph-twitch-logo text-2xl"></i> Síguenos en Twitch
+                    </a>
+                </div>
+                <div id="inscripcion" class="mt-24">
+                    <h3 class="text-4xl md:text-5xl font-orbitron font-bold text-white">¿Listo para hacer historia?</h3>
+                    <div class="mt-8">
+                        <a href="https://www.faceit.com/es/championship/63f68d66-d67e-4a2b-a655-4ba8c18214dd/Season%2520II" target="_blank" class="cta-pulse inline-block bg-orange-500 hover:bg-orange-600 text-white font-bold text-lg py-4 px-10 rounded-lg transition-all duration-300 transform hover:scale-105">
+                            ¡QUIERO COMPETIR!
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ===== Footer ===== -->
+    <footer class="bg-black py-10">
+        <div class="container mx-auto px-6 text-center text-slate-500">
+            <!-- NUEVA SECCIÓN: Patrocinadores -->
+            <div class="mb-10">
+                <h3 class="text-sm uppercase tracking-widest text-slate-400 mb-6" data-translate="sponsorsTitle">Nuestros patrocinadores</h3>
+                <div class="flex justify-center items-center gap-8 opacity-60">
+                    <img src="assets/img/FACEIT.png" alt="FACEIT Logo" class="h-8 filter grayscale hover:grayscale-0 transition-all duration-300">
+                </div>
+            </div>
+            <div class="flex justify-center space-x-6 mt-6">
+                <a href="https://twitter.com/OWAndromedaes" target="_blank" class="hover:text-orange-500 transition-colors"><i class="ph-fill ph-twitter-logo text-2xl"></i></a>
+                <a href="https://www.twitch.tv/owandromedaes" target="_blank" class="hover:text-orange-500 transition-colors"><i class="ph-fill ph-twitch-logo text-2xl"></i></a>
+                <a href="https://discord.com/owandromeda" target="_blank" class="hover:text-orange-500 transition-colors"><i class="ph-fill ph-discord-logo text-2xl"></i></a>
+            </div>
+            <p class="mt-4 text-sm" data-translate="footerRights">&copy; 2024 OW Andromeda. Todos los derechos reservados.</p>
+            <p class="mt-2 text-xs" data-translate="footerDisclaimer">Overwatch es una marca registrada de Blizzard Entertainment, Inc. Esta liga no está afiliada ni respaldada por Blizzard Entertainment.</p>
+        </div>
+    </footer>
+
+
+    <!-- ===== Cookie Consent Banner (Atrevido) ===== -->
+    <div id="cookie-banner" class="hidden fixed bottom-0 left-0 w-full bg-zinc-950/95 backdrop-blur-sm border-t-2 border-orange-500 p-5 z-[100] transform translate-y-full transition-transform duration-500 ease-in-out">
+        <div class="container mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-4">
+                <i class="ph-fill ph-cookie text-4xl text-orange-500 hidden sm:block"></i>
+                <div>
+                    <h4 class="font-orbitron font-bold text-white">¡Alerta, un Andromeder detectado!</h4>
+                    <p class="text-sm text-slate-300">
+                        Esta base de operaciones utiliza 'cookies cósmicas' para que tu experiencia sea legendaria. No son comestibles, pero optimizan la misión. 
+                        <a href="#" id="view-cookie-report-btn" class="text-orange-500 hover:underline">Leer bitacora.</a>
+                    </p>
+                </div>
+            </div>
+            <div class="flex items-center gap-3 flex-shrink-0 mt-4 md:mt-0">
+                <button id="reject-cookies-btn" class="bg-zinc-700 hover:bg-zinc-600 text-white font-bold py-2 px-5 rounded-lg transition-colors">
+                    Negativo
+                </button>
+                <button id="accept-cookies-btn" class="bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-5 rounded-lg transition-colors">
+                    ¡Entendido!
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- ===== Cookie Report Modal ===== -->
+    <div id="cookie-report-modal" class="hidden fixed inset-0 bg-black/70 backdrop-blur-sm z-[110] flex items-center justify-center p-4">
+        <div id="cookie-modal-content" class="bg-zinc-900 border-2 border-orange-500 rounded-lg shadow-2xl shadow-orange-500/30 max-w-2xl w-full p-8 relative transform transition-all scale-95 opacity-0">
+            <button id="close-cookie-modal-btn" class="absolute top-4 right-4 text-slate-400 hover:text-white">
+                <i class="ph-fill ph-x text-2xl"></i>
+            </button>
+            <h2 class="text-3xl font-orbitron font-bold text-white text-center mb-4">✨ Informe de Misión: Cookies</h2>
+            <div id="cookie-report-text" class="text-slate-300 space-y-4 leading-relaxed max-h-[60vh] overflow-y-auto pr-4">
+                <!-- Gemini content will be injected here -->
+                <div class="flex justify-center items-center h-32">
+                     <div class="spinner"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        // --- Lógica del menú móvil y header ---
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileMenuIcon = mobileMenuButton.querySelector('i');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            mobileMenuIcon.classList.toggle('ph-list');
+            mobileMenuIcon.classList.toggle('ph-x');
+        });
+
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                if (!link.target) { // Solo cierra si es un enlace interno
+                    mobileMenu.classList.add('hidden');
+                    mobileMenuIcon.classList.add('ph-list');
+                    mobileMenuIcon.classList.remove('ph-x');
+                }
+            });
+        });
+
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => {
+            header.classList.toggle('py-2', window.scrollY > 50);
+            header.classList.toggle('py-4', window.scrollY <= 50);
+        });
+
+        // --- Lógica de la API de Gemini ---
+        const API_KEY = "AIzaSyDf7t6jUd9N7xl26ItiogwKou_P3jnsYr0"; // API Key añadida
+        const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${API_KEY}`;
+        
+        async function callGemini(prompt) {
+            const payload = { contents: [{ role: "user", parts: [{ text: prompt }] }] };
+            try {
+                const response = await fetch(API_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                if (!response.ok) { throw new Error(`API Error: ${response.statusText}`); }
+                const result = await response.json();
+                if (result.candidates && result.candidates.length > 0) {
+                    let text = result.candidates[0].content.parts[0].text.trim();
+                    // Limpiamos la respuesta para eliminar el formato markdown que a veces añade la IA
+                    text = text.replace(/```html/g, '').replace(/```/g, '');
+                    return text;
+                }
+                return "<p>No se pudo generar un análisis. Inténtalo de nuevo.</p>";
+            } catch (error) {
+                console.error("Error llamando a la API de Gemini:", error);
+                return "<p>Error de conexión. Revisa la consola para más detalles.</p>";
+            }
+        }
+        // --- Funcionalidad del Generador de Nombres ---
+        const generateNameBtn = document.getElementById('generate-name-btn');
+        const nameKeywordInput = document.getElementById('name-keyword');
+        const generatedNameContainer = document.getElementById('generated-name-container');
+        const generatedNameText = document.getElementById('generated-name-text');
+        const copyNameBtn = document.getElementById('copy-name-btn');
+        const copyNameFeedback = document.getElementById('copy-name-feedback');
+        const generateNameSpinner = document.getElementById('generate-name-spinner');
+        const generateNameBtnText = document.getElementById('generate-name-btn-text');
+
+        if(generateNameBtn) {
+            generateNameBtn.addEventListener('click', async () => {
+                setLoadingState(generateNameBtn, generateNameBtnText, generateNameSpinner, true);
+                copyNameFeedback.classList.add('hidden');
+                
+                const keyword = nameKeywordInput.value;
+                const prompt = `Genera un nombre de equipo de e-sports para Overwatch 2 que sea épico, memorable y con temática de ciencia ficción o cósmica. ${keyword ? `Usa la palabra clave '${keyword}' como inspiración.` : ''} Responde únicamente con el nombre del equipo, sin explicaciones adicionales.`;
+                
+                const name = await callGemini(prompt);
+                generatedNameText.textContent = name;
+                generatedNameContainer.classList.remove('hidden');
+                
+                setLoadingState(generateNameBtn, generateNameBtnText, generateNameSpinner, false);
+            });
+        }
+        
+        if(copyNameBtn) {
+            copyNameBtn.addEventListener('click', () => {
+                copyToClipboard(generatedNameText.textContent, copyNameFeedback);
+            });
+        }
+
+        // --- Lógica del Acordeón de FAQ ---
+        const faqQuestions = document.querySelectorAll('.faq-question');
+        faqQuestions.forEach(button => {
+            button.addEventListener('click', () => {
+                const answer = button.closest('.bg-zinc-800').querySelector('.faq-answer');
+                const isActive = button.classList.contains('active');
+                
+                document.querySelectorAll('.faq-answer').forEach(ans => ans.classList.add('hidden'));
+                document.querySelectorAll('.faq-question').forEach(btn => btn.classList.remove('active'));
+
+                if (!isActive) {
+                    button.classList.add('active');
+                    answer.classList.remove('hidden');
+                }
+            });
+        });
+
+        // --- Lógica del Banner de Cookies (Atrevido) ---
+        const cookieBanner = document.getElementById('cookie-banner');
+        const acceptCookiesBtn = document.getElementById('accept-cookies-btn');
+        const rejectCookiesBtn = document.getElementById('reject-cookies-btn');
+
+        function setCookie(name, value, days) {
+            let expires = "";
+            if (days) {
+                const date = new Date();
+                date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                expires = "; expires=" + date.toUTCString();
+            }
+            document.cookie = name + "=" + (value || "")  + expires + "; path=/";
+        }
+
+        function getCookie(name) {
+            const nameEQ = name + "=";
+            const ca = document.cookie.split(';');
+            for(let i = 0; i < ca.length; i++) {
+                let c = ca[i];
+                while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+                if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+            }
+            return null;
+        }
+
+        function hideBanner() {
+            cookieBanner.classList.add('translate-y-full');
+            setTimeout(() => {
+                cookieBanner.classList.add('hidden');
+            }, 500); // Espera a que termine la animación
+        }
+
+        if (!getCookie('cookie_consent')) {
+            cookieBanner.classList.remove('hidden');
+            setTimeout(() => {
+                cookieBanner.classList.remove('translate-y-full');
+            }, 100); 
+        }
+
+        acceptCookiesBtn.addEventListener('click', () => {
+            setCookie('cookie_consent', 'accepted', 365);
+            hideBanner();
+        });
+
+        rejectCookiesBtn.addEventListener('click', () => {
+            setCookie('cookie_consent', 'rejected', 365); 
+            hideBanner();
+        });
+        
+        // --- Lógica del Informe de Cookies con Gemini ---
+        const viewCookieReportBtn = document.getElementById('view-cookie-report-btn');
+        const cookieReportModal = document.getElementById('cookie-report-modal');
+        const cookieModalContent = document.getElementById('cookie-modal-content');
+        const closeCookieModalBtn = document.getElementById('close-cookie-modal-btn');
+        const cookieReportText = document.getElementById('cookie-report-text');
+
+        viewCookieReportBtn.addEventListener('click', async (e) => {
+            e.preventDefault(); 
+            cookieReportModal.classList.remove('hidden');
+            setTimeout(() => { 
+                cookieModalContent.classList.remove('scale-95', 'opacity-0');
+            }, 10);
+            
+            cookieReportText.innerHTML = `<div class="flex justify-center items-center h-32"><div class="spinner"></div></div>`;
+
+            const lore = `
+                - Ereus: Batai como el buen masón que es tenía que tener un equipo en su propia liga y por casualidad ese equipo quedó cuarto.
+                - Redline: En Redline siempre estuvieron seguros de no dejar a Hegoi jugar; sin embargo, al faltarles su tanque, tuvieron que cruzar la línea.
+                - Unholy Pickles: Pese a que algunos todavía recordamos a sus miembros más que otros, en el fondo todos los extrañamos.
+                - Spartans Will: Un gran equipo con una gran hazaña que por desgracia nadie pudo verla: ganarle un mapa de Flashpoint a Natch Der Untoten.
+                - Natch Der Untoten: Los titanes imbatibles, leyendas que al final se alzaron con la gloria.
+                - Five: No hay palabras que puedan describir a Five, su paso por la liga fue tan especial como único.
+                - Grow Up: Portugueses que consiguieron lo imposible, que todos los apoyaran en su final y pese a que fue en vano, nadie olvidará su esfuerzo.
+                - Notion Deep Down: No siempre puedes ganar, pero Notion Deep Down demostró que podías perder con gloria, lo cual marcó un antes y un después en la temporada de la OWA.
+            `;
+
+            const prompt = `Actúa como el historiador de la liga de e-sports 'OW Andromeda'. Tu misión es explicar qué son las cookies de una forma muy original y divertida, conectándolas con las leyendas y anécdotas de nuestra liga. Queremos que los usuarios entiendan que las cookies 'recuerdan' cosas, igual que nosotros recordamos estas historias. Usa el siguiente texto como inspiración para crear un párrafo divertido y épico. El texto debe explicar que las cookies nos ayudan a recordar sus preferencias (como si aceptaron este mensaje) y a ver qué partes de la web son más visitadas, pero todo con la temática de las anécdotas que te doy. Aquí las leyendas: ${lore}. Crea un párrafo que hile estas historias con la idea de que las cookies son 'fragmentos de memoria' de la liga. Responde solo con la explicación en párrafos de HTML (<p>).`;
+            
+            const report = await callGemini(prompt);
+            cookieReportText.innerHTML = report;
+        });
+
+        closeCookieModalBtn.addEventListener('click', () => {
+            cookieModalContent.classList.add('scale-95', 'opacity-0');
+            setTimeout(() => {
+                cookieReportModal.classList.add('hidden');
+            }, 300);
+        });
+
+        cookieReportModal.addEventListener('click', (e) => {
+            if (e.target === cookieReportModal) {
+                closeCookieModalBtn.click();
+            }
+        });
+
+        // --- Funciones de Utilidad ---
+        function setLoadingState(button, buttonText, spinner, isLoading) {
+            if (isLoading) {
+                button.disabled = true;
+                buttonText.classList.add('hidden');
+                spinner.classList.remove('hidden');
+            } else {
+                button.disabled = false;
+                buttonText.classList.remove('hidden');
+                spinner.classList.add('hidden');
+            }
+        }
+
+        function copyToClipboard(text, feedbackElement) {
+            if (!text) return;
+            const textArea = document.createElement('textarea');
+            textArea.value = text;
+            document.body.appendChild(textArea);
+            textArea.select();
+            try {
+                document.execCommand('copy');
+                feedbackElement.classList.remove('hidden');
+                setTimeout(() => feedbackElement.classList.add('hidden'), 2000);
+            } catch (err) {
+                console.error('No se pudo copiar el texto', err);
+            }
+            document.body.removeChild(textArea);
+        }
+    </script>
+
+</body>
+</html>

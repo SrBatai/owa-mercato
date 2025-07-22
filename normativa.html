@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OWA | Normativa</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Orbitron (títulos) e Inter (cuerpo) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
+    
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <style>
+        /* Aplicar las fuentes personalizadas a través de las clases de Tailwind */
+        .font-orbitron { font-family: 'Orbitron', sans-serif; }
+        .font-inter { font-family: 'Inter', sans-serif; }
+        
+        /* Estilo para el fondo */
+        .main-bg {
+            background-color: #0a0a0a; /* Fondo negro profundo */
+        }
+
+        /* Estilo para el enlace activo en la navegación lateral */
+        .sidebar-link.active {
+            background-color: #f97316; /* orange-500 */
+            color: white;
+            font-weight: bold;
+        }
+
+        /* Estilos para listas */
+        #rules-content ul {
+            list-style-type: disc;
+            padding-left: 20px;
+            margin-bottom: 0.75rem;
+        }
+        #rules-content ol {
+            list-style-type: decimal;
+            padding-left: 20px;
+            margin-bottom: 0.75rem;
+        }
+        #rules-content li::marker {
+            color: #f97316; /* orange-500 */
+        }
+    </style>
+</head>
+<body class="bg-zinc-950 text-slate-200 font-inter">
+
+    <!-- ===== Header / Navegación ===== -->
+    <header id="header" class="bg-zinc-950/80 backdrop-blur-sm sticky top-0 left-0 w-full z-50 transition-all duration-300">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <!-- Logo -->
+            <a href="index.html" class="text-2xl font-orbitron font-bold text-white">
+                 OW<span class="text-orange-500">A</span>
+            </a>
+            
+            <!-- Menú para Desktop -->
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="index.html" class="hover:text-orange-500 transition-colors">Inicio</a>
+                <a href="partidos.html" class="hover:text-orange-500 transition-colors">Partidos</a>
+                <a href="clasificacion.html" class="hover:text-orange-500 transition-colors">Clasificación</a>
+                <a href="mercado.html" class="hover:text-orange-500 transition-colors">Mercato</a>
+                <a href="#" class="text-orange-500 font-bold">Normativa</a>
+            </div>
+            
+            <!-- Botón de Inscripción (Desktop) -->
+            <a href="https://www.faceit.com/es/championship/63f68d66-d67e-4a2b-a655-4ba8c18214dd/Season%2520II" target="_blank" class="hidden md:block bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-5 rounded-lg transition-all duration-300 transform hover:scale-105">
+                Inscríbete
+            </a>
+
+            <!-- Botón de Menú Móvil -->
+            <button id="mobile-menu-button" class="md:hidden text-white focus:outline-none">
+                <i class="ph-fill ph-list text-3xl"></i>
+            </button>
+        </nav>
+
+        <!-- Menú Móvil (Oculto por defecto) -->
+        <div id="mobile-menu" class="hidden md:hidden bg-zinc-900">
+            <a href="index.html" class="block py-2 px-4 hover:bg-zinc-800 hover:text-orange-500">Inicio</a>
+            <a href="partidos.html" class="block py-2 px-4 hover:bg-zinc-800 hover:text-orange-500">Partidos</a>
+            <a href="clasificacion.html" class="block py-2 px-4 hover:bg-zinc-800 hover:text-orange-500">Clasificación</a>
+            <a href="mercado.html" class="block py-2 px-4 hover:bg-zinc-800 hover:text-orange-500">Mercato</a>
+            <a href="#" class="block py-2 px-4 bg-zinc-800 text-orange-500 font-bold">Normativa</a>
+            <a href="https://www.faceit.com/es/championship/63f68d66-d67e-4a2b-a655-4ba8c18214dd/Season%2520II" target="_blank" class="block text-center py-4 px-4 bg-orange-500 text-white font-bold">Inscríbete</a>
+        </div>
+    </header>
+
+    <main class="main-bg pt-12 pb-20">
+        <div class="container mx-auto px-6">
+            <div class="text-center pt-12 pb-16">
+                <h1 class="text-5xl md:text-6xl font-orbitron font-bold text-white">Normativa OWA Season 2</h1>
+                <p class="mt-4 max-w-3xl mx-auto font-bold text-orange-400">
+                    El incumplimiento de cualquiera de estas normas significa una penalización desde un aviso al jugador/equipo hasta la expulsión del mismo.
+                </p>
+            </div>
+
+            <div class="flex flex-col lg:flex-row gap-12">
+                <!-- Navegación Lateral -->
+                <aside class="lg:w-1/4 lg:sticky lg:top-24 self-start">
+                    <nav id="rules-nav" class="space-y-2">
+                        <a href="#inscripciones" class="sidebar-link flex items-center gap-3 p-3 rounded-lg hover:bg-zinc-800 transition-colors">
+                            <i class="ph-fill ph-clipboard-text text-xl text-orange-400"></i><span class="font-semibold">1. Inscripciones</span>
+                        </a>
+                        <a href="#elegibilidad" class="sidebar-link flex items-center gap-3 p-3 rounded-lg hover:bg-zinc-800 transition-colors">
+                            <i class="ph-fill ph-check-square-offset text-xl text-orange-400"></i><span class="font-semibold">2. Elegibilidad</span>
+                        </a>
+                        <a href="#equipos" class="sidebar-link flex items-center gap-3 p-3 rounded-lg hover:bg-zinc-800 transition-colors">
+                           <i class="ph-fill ph-users-three text-xl text-orange-400"></i><span class="font-semibold">3. Equipos</span>
+                        </a>
+                        <a href="#pago-prizepool" class="sidebar-link flex items-center gap-3 p-3 rounded-lg hover:bg-zinc-800 transition-colors">
+                           <i class="ph-fill ph-trophy text-xl text-orange-400"></i><span class="font-semibold">4. Pago y Prize Pool</span>
+                        </a>
+                        <a href="#veto-personajes" class="sidebar-link flex items-center gap-3 p-3 rounded-lg hover:bg-zinc-800 transition-colors">
+                           <i class="ph-fill ph-user-minus text-xl text-orange-400"></i><span class="font-semibold">5. Veto de Personajes</span>
+                        </a>
+                        <a href="#formato" class="sidebar-link flex items-center gap-3 p-3 rounded-lg hover:bg-zinc-800 transition-colors">
+                           <i class="ph-fill ph-graph text-xl text-orange-400"></i><span class="font-semibold">6. Formato</span>
+                        </a>
+                        <a href="#map-pool" class="sidebar-link flex items-center gap-3 p-3 rounded-lg hover:bg-zinc-800 transition-colors">
+                           <i class="ph-fill ph-map-trifold text-xl text-orange-400"></i><span class="font-semibold">7. Map Pool</span>
+                        </a>
+                        <a href="#reschedule" class="sidebar-link flex items-center gap-3 p-3 rounded-lg hover:bg-zinc-800 transition-colors">
+                           <i class="ph-fill ph-calendar text-xl text-orange-400"></i><span class="font-semibold">8. Reschedule</span>
+                        </a>
+                        <a href="#forfeits" class="sidebar-link flex items-center gap-3 p-3 rounded-lg hover:bg-zinc-800 transition-colors">
+                           <i class="ph-fill ph-flag-pennant text-xl text-orange-400"></i><span class="font-semibold">9. Forfeits</span>
+                        </a>
+                        <a href="#pausas" class="sidebar-link flex items-center gap-3 p-3 rounded-lg hover:bg-zinc-800 transition-colors">
+                           <i class="ph-fill ph-pause text-xl text-orange-400"></i><span class="font-semibold">10. Pausas</span>
+                        </a>
+                        <a href="#puntualidad" class="sidebar-link flex items-center gap-3 p-3 rounded-lg hover:bg-zinc-800 transition-colors">
+                           <i class="ph-fill ph-clock text-xl text-orange-400"></i><span class="font-semibold">11. Puntualidad</span>
+                        </a>
+                        <a href="#stream" class="sidebar-link flex items-center gap-3 p-3 rounded-lg hover:bg-zinc-800 transition-colors">
+                           <i class="ph-fill ph-twitch-logo text-xl text-orange-400"></i><span class="font-semibold">12. Stream</span>
+                        </a>
+                        <a href="#horario" class="sidebar-link flex items-center gap-3 p-3 rounded-lg hover:bg-zinc-800 transition-colors">
+                           <i class="ph-fill ph-calendar-check text-xl text-orange-400"></i><span class="font-semibold">13. Horario</span>
+                        </a>
+                        <a href="#primer-mapa" class="sidebar-link flex items-center gap-3 p-3 rounded-lg hover:bg-zinc-800 transition-colors">
+                            <i class="ph-fill ph-map-pin text-xl text-orange-400"></i><span class="font-semibold">Primer Mapa</span>
+                        </a>
+                        <a href="#anti-account-share" class="sidebar-link flex items-center gap-3 p-3 rounded-lg hover:bg-zinc-800 transition-colors">
+                           <i class="ph-fill ph-shield-warning text-xl text-orange-400"></i><span class="font-semibold">14. Anti-Account Share</span>
+                        </a>
+                    </nav>
+                </aside>
+
+                <!-- Contenido de la Normativa -->
+                <div id="rules-content" class="lg:w-3/4 space-y-16">
+                    
+                    <section id="inscripciones" class="rule-section">
+                        <h2 class="text-3xl font-orbitron font-bold text-white border-b-2 border-orange-500 pb-2 mb-6 flex items-center gap-4"><i class="ph-fill ph-clipboard-text"></i>1. INSCRIPCIONES</h2>
+                        <div class="space-y-6 text-slate-300 leading-relaxed bg-zinc-900 p-6 rounded-lg">
+                            <p>Puedes inscribir a tu equipo en la página de FACEIT: <a href="https://www.faceit.com/es/championship/63f68d66-d67e-4a2b-a655-4ba8c18214dd/Season%2520II" target="_blank" class="text-orange-400 hover:text-orange-500 underline">Link de Inscripción</a>.</p>
+                            <ul>
+                                <li>Todos los integrantes del equipo deben estar dentro del servidor de discord para recibir los roles necesarios para la competición.</li>
+                                <li>Las inscripciones abrirán el día 1 de agosto y cerrarán el día 31 de agosto a las 23:59 CEST.</li>
+                                <li>El número máximo de equipos será de 28, a partir de ahí no podrá inscribirse ningún equipo más, independientemente de la fecha.</li>
+                            </ul>
+                            <p>En caso de inscribirte, asumes que puedes recibir el pago del torneo mediante <strong>BIZUM o PAYPAL</strong>, consientes que tu partido pueda ser retransmitido en <strong>TWITCH</strong> y que tú o cualquiera de los compañeros de tu equipo sabe crear y manejar una partida personalizada en caso de ser necesario.</p>
+                        </div>
+                    </section>
+
+                    <section id="elegibilidad" class="rule-section">
+                        <h2 class="text-3xl font-orbitron font-bold text-white border-b-2 border-orange-500 pb-2 mb-6 flex items-center gap-4"><i class="ph-fill ph-check-square-offset"></i>2. ELEGIBILIDAD</h2>
+                        <div class="space-y-6 text-slate-300 leading-relaxed bg-zinc-900 p-6 rounded-lg">
+                            <p>Para que un equipo sea válido para participar en la liga debe cumplir las siguientes normas:</p>
+                            <ul>
+                                <li>Todos los capitanes del equipo deben de haber inscrito a su equipo en la página de <strong>FACEIT</strong>.</li>
+                                <li>Todos los jugadores deben de estar dentro del servidor. Link de invitación: <a href="http://discord.gg/owandromeda" target="_blank" class="text-orange-400 hover:text-orange-500 underline">discord.gg/owandromeda</a>.</li>
+                                <li>Al menos 3 jugadores titulares deben de ser Españoles o Portugueses. En caso de duda el administrador del torneo podrá pedir al jugador que proporcione su Documento de identidad o Pasaporte para verificar su nacionalidad, solo cualquiera de estos dos documentos se considerarán válidos. En caso de no poder proporcionar ninguno de estos dos documentos el jugador será considerado <em>“Extranjero”</em>. Los jugadores provenientes de LATAM (a exclusión de Brasil) no se considerarán extranjeros <strong>SÓLO SI RESIDEN EN EUROPA</strong>.</li>
+                                <li>Un equipo no puede tener más de siete jugadores extranjeros, se considera jugador extranjero a cualquier jugador que no sea español/portugués/hispano residiendo en Europa.</li>
+                                <li>Un equipo no podrá tener más de 10 jugadores.</li>
+                                <li>El nombre del equipo no podrá ser inapropiado de ninguna forma.</li>
+                                <li>El logo del equipo no podrá ser inapropiado de ninguna forma.</li>
+                                <li>El nombre de las cuentas de los jugadores no podrá ser inapropiada de ninguna forma.</li>
+                            </ul>
+                        </div>
+                    </section>
+                    
+                    <section id="equipos" class="rule-section">
+                        <h2 class="text-3xl font-orbitron font-bold text-white border-b-2 border-orange-500 pb-2 mb-6 flex items-center gap-4"><i class="ph-fill ph-users-three"></i>3. EQUIPOS</h2>
+                        <div class="space-y-6 text-slate-300 leading-relaxed bg-zinc-900 p-6 rounded-lg">
+                           <ul>
+                               <li>Habrá 8 equipos en total participando en la liga.</li>
+                               <li>Cada equipo tendrá un máximo de 10 jugadores y un mínimo de 5.</li>
+                               <li>El último día para realizar un cambio en el roster del equipo será el 14 de octubre a las 23:59 CEST, siempre sin sobrepasar el límite de 10 jugadores en el equipo.</li>
+                               <li>No se podrán realizar cambios en el roster del equipo el mismo día en el que el mismo equipo va a jugar un partido.</li>
+                               <li>Cuando un equipo agregue a un nuevo jugador, ese jugador deberá permanecer en ese equipo durante al menos 2 semanas antes de poder salir del equipo.</li>
+                               <li>Cada equipo puede tener hasta siete jugadores extranjeros, se considera jugador extranjero a cualquier jugador que no sea hispano/portugués.</li>
+                               <li>Durante un partido, solo se podrá jugar con un máximo de dos extranjeros en un mismo mapa.</li>
+                           </ul>
+                        </div>
+                    </section>
+
+                    <section id="pago-prizepool" class="rule-section">
+                        <h2 class="text-3xl font-orbitron font-bold text-white border-b-2 border-orange-500 pb-2 mb-6 flex items-center gap-4"><i class="ph-fill ph-trophy"></i>4. PAGO Y PRIZE POOL</h2>
+                        <div class="space-y-6 text-slate-300 leading-relaxed bg-zinc-900 p-6 rounded-lg">
+                           <p>Los pagos realizados del torneo se harán mediante <strong>BIZUM o PAYPAL</strong>, y se entregarán al capitán designado del equipo.</p>
+                           <p>La pricepool será de 1000€ y será distribuida de siguiente forma:</p>
+                           <ul>
+                               <li><strong>500€</strong> Primer puesto</li>
+                               <li><strong>250€</strong> Segundo puesto</li>
+                               <li><strong>150€</strong> Tercer puesto</li>
+                               <li><strong>100€</strong> Cuarto Puesto</li>
+                           </ul>
+                        </div>
+                    </section>
+                    
+                    <section id="veto-personajes" class="rule-section">
+                        <h2 class="text-3xl font-orbitron font-bold text-white border-b-2 border-orange-500 pb-2 mb-6 flex items-center gap-4"><i class="ph-fill ph-user-minus"></i>5. VETO DE PERSONAJES</h2>
+                        <div class="space-y-6 text-slate-300 leading-relaxed bg-zinc-900 p-6 rounded-lg">
+                           <p>Durante la temporada regular y las playoffs de la Andromeda, implementaremos el veto de personajes, que funcionará de la siguiente forma:</p>
+                           <ul>
+                               <li>El veto ocurrirá antes de que empiece el mapa y después de que los dos equipos confirmen la alineación para el mismo.</li>
+                               <li>Durante el primer mapa del partido, el equipo localizado en la IZQUIERDA en el partido de FACEIT y en el Horario, será el primer equipo en vetar a un personaje.</li>
+                               <li>Durante el primer mapa en las Playoffs, el equipo con puesto más alto será el primero en vetar a un personaje.</li>
+                               <li>Durante el resto de los mapas del partido, el equipo que haya perdido el mapa anterior, veta primero, mientras que el equipo que haya ganado el mapa anterior, veta segundo. En caso de empatar un mapa, el último equipo que haya perdido un mapa, vetará primero.</li>
+                               <li>Cada equipo podrá banear un personaje por cada mapa jugado en el partido.</li>
+                               <li>No se podrán vetar dos personajes del mismo rol en el mismo mapa.</li>
+                               <li>Cada equipo solo podrá vetar un personaje una vez durante el transcurso del partido (Esto significa que un personaje solo podrá ser vetado como máximo dos veces en un mismo partido, una vez por cada equipo).</li>
+                               <li>Los vetos de personajes se aplicarán a los dos equipos que estén jugando el partido.</li>
+                           </ul>
+                        </div>
+                    </section>
+                    
+                    <section id="formato" class="rule-section">
+                        <h2 class="text-3xl font-orbitron font-bold text-white border-b-2 border-orange-500 pb-2 mb-6 flex items-center gap-4"><i class="ph-fill ph-graph"></i>6. FORMATO</h2>
+                        <div class="space-y-8 text-slate-300 leading-relaxed bg-zinc-900 p-6 rounded-lg">
+                            <div>
+                                <h3 class="text-xl font-orbitron font-semibold text-orange-400 mb-3">6.1. Clasificatorio</h3>
+                                <div class="space-y-4">
+                                    <p>Los 28 equipos apuntados se dividirán en 4 grupos de 7 equipos, los cuales jugarán 6 partidos Bo3 (Uno contra cada equipo de su grupo) en un fin de semana. De ahí, los mejores equipos de cada grupo se clasificarán a la Season 2 de la Andromeda.</p>
+                                    <ul>
+                                        <li>El primer mapa estará escogido de forma predeterminada y será de control.</li>
+                                        <li>El perdedor de un mapa podrá escoger el siguiente modo y mapa (Siempre y cuando ese modo no se haya jugado aún).</li>
+                                        <li>El ganador podrá escoger el bando (ataque o defensa).</li>
+                                        <li>En caso de empate, el equipo que perdió el anterior mapa, elige el siguiente.</li>
+                                    </ul>
+                                    <p class="font-bold text-orange-400">DURANTE LOS CLASIFICATORIOS NO HABRÁ VETO DE PERSONAJES.</p>
+                                    <p>Los clasificatorios comenzarán el 5 de septiembre y tendrán el siguiente horario:</p>
+                                    <p class="font-semibold text-white">5 de septiembre</p>
+                                    <ul class="list-none pl-4">
+                                        <li>- 17:00 CEST Partido 1</li>
+                                        <li>- 18:00 CEST Partido 2</li>
+                                        <li>- 19:00 CEST Partido 3</li>
+                                    </ul>
+                                    <p class="font-semibold text-white">6 de septiembre</p>
+                                    <ul class="list-none pl-4">
+                                        <li>- 17:00 CEST Partido 4</li>
+                                        <li>- 18:00 CEST Partido 5</li>
+                                        <li>- 19:00 CEST Partido 6</li>
+                                    </ul>
+                                    <p>El horario de los partidos es fijo y no se podrá cambiar bajo ninguna circunstancia.</p>
+                                </div>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-orbitron font-semibold text-orange-400 mb-3">6.2. Temporada regular</h3>
+                                <div class="space-y-4">
+                                    <p>Los 8 equipos que participarán en la liga jugarán una vez contra el resto de participantes en un Bo5.</p>
+                                    <ul>
+                                        <li>El primer mapa estará escogido de forma predeterminada y será de control.</li>
+                                        <li>El perdedor de un mapa podrá escoger el siguiente modo y mapa (Siempre y cuando ese modo no se haya jugado aún).</li>
+                                        <li>El ganador podrá escoger el bando (ataque o defensa).</li>
+                                        <li>En caso de empate, el equipo que perdió el anterior mapa, elige el siguiente y banea primero.</li>
+                                    </ul>
+                                    <p>La temporada regular comenzará el día 30 de agosto, habiendo 2 partidos los sábados y domingos. Cuando todos los equipos hayan jugado 7 partidos, los 4 mejores equipos se clasificarán para las playoffs.</p>
+                                </div>
+                            </div>
+                             <div>
+                                <h3 class="text-xl font-orbitron font-semibold text-orange-400 mb-3">6.3. Playoffs</h3>
+                                <div class="space-y-4">
+                                    <p>La tiebreaker funcionará en el siguiente orden:</p>
+                                    <ol>
+                                        <li>Número de victorias</li>
+                                        <li>Diferencia de mapas</li>
+                                        <li>Head to head winrate</li>
+                                        <li>Head to head winrate contra otros equipos</li>
+                                        <li>Partido de desempate</li>
+                                    </ol>
+                                    <p>Las playoffs tendrán lugar el 8 de noviembre. Consistirán en una Double Elimination bracket donde todos los partidos serán Bo5 mientras que las Finales serán Bo7.</p>
+                                    <p>El equipo con prioridad será el equipo que escoja el primer mapa de Control y realice el primer baneo durante su partido de playoffs, las reglas siguen este criterio para determinar cuál es el equipo con prioridad:</p>
+                                    <ol>
+                                        <li><strong>Desempeño en las playoffs:</strong> El primer criterio que decidirá cuál es el equipo con prioridad durante un partido será su desempeño en las playoffs, el desempeño se mide en base a lo que ha tardado ese equipo en bajar a la Lower Bracket, dando prioridad a los equipos que hayan tardado más en bajar a la Lower Bracket.</li>
+                                        <li><strong>Clasificación en la fase regular:</strong> En caso de que los dos equipos que se estén enfrentando en un partido hayan bajado a la Lower Bracket al mismo tiempo, la prioridad la tendrá el equipo con mejor clasificación en la fase regular de la OWAndromeda.</li>
+                                    </ol>
+                                    <p>La distribución de la bracket de las Playoffs se realizará de la siguiente forma:</p>
+                                    <ul class="list-none pl-4">
+                                        <li>- #1 vs #8</li>
+                                        <li>- #4 vs #5</li>
+                                        <li>- #2 vs #7</li>
+                                        <li>- #3 vs #6</li>
+                                    </ul>
+                                    <p>Habrá 15 minutos de descanso entre la finalización de las Lower Bracket Finals y las Grand Finals si el equipo que avanza a las Grand Finals lo solicita.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section id="map-pool" class="rule-section">
+                        <h2 class="text-3xl font-orbitron font-bold text-white border-b-2 border-orange-500 pb-2 mb-6 flex items-center gap-4"><i class="ph-fill ph-map-trifold"></i>7. MAP POOL</h2>
+                        <div class="space-y-4 text-slate-300 leading-relaxed bg-zinc-900 p-6 rounded-lg">
+                           <p><strong>Control:</strong> Península Antártica, Busan, Samoa, Torre Lijiang</p>
+                           <p><strong>Escolta:</strong> Circuit Royal, Rialto, Observatorio: Gibraltar, Ruta 66</p>
+                           <p><strong>Flashpoint:</strong> Suravasa, New Junk City, Aatlis</p>
+                           <p><strong>Híbrido:</strong> Eichenwalde, Midtown, King’s Row, Blizzard World</p>
+                           <p><strong>Push:</strong> Colosseo, Runasapi, New Queen Street, Esperança</p>
+                        </div>
+                    </section>
+
+                    <section id="reschedule" class="rule-section">
+                        <h2 class="text-3xl font-orbitron font-bold text-white border-b-2 border-orange-500 pb-2 mb-6 flex items-center gap-4"><i class="ph-fill ph-calendar"></i>8. RESCHEDULE</h2>
+                        <div class="space-y-6 text-slate-300 leading-relaxed bg-zinc-900 p-6 rounded-lg">
+                            <p>Los partidos podrán ser cambiados de fecha y hora pero bajo ciertas condiciones:</p>
+                            <ul>
+                                <li>Los dos equipos tienen que aceptar el reschedule del partido.</li>
+                                <li>Los equipos solicitantes tienen que proporcionar una razón de peso para cambiar la fecha del partido, puesto que para que se realice oficialmente el cambio, tendrá que ser aprobado por un moderador.</li>
+                                <li>Cada equipo solo podrá realizar <strong>TRES</strong> reschedules durante la duración de la fase regular.</li>
+                            </ul>
+                            <p>Si el cambio de hora no supera las 2h con respecto al horario original, no contará como un uso del reschedule. Al cambiar la fecha oficial de un partido, es posible que no se pueda transmitir en el canal oficial.</p>
+                        </div>
+                    </section>
+                    
+                    <section id="forfeits" class="rule-section">
+                        <h2 class="text-3xl font-orbitron font-bold text-white border-b-2 border-orange-500 pb-2 mb-6 flex items-center gap-4"><i class="ph-fill ph-flag-pennant"></i>9. FORFEITS</h2>
+                        <div class="space-y-6 text-slate-300 leading-relaxed bg-zinc-900 p-6 rounded-lg">
+                            <p>En la fase regular de la Andromeda, un equipo solo podrá realizar en total <strong>TRES FORFEITS</strong>, en caso de superar esta cantidad, el equipo será descalificado de la competición debido a la falta de compromiso con la liga.</p>
+                        </div>
+                    </section>
+                    
+                    <section id="pausas" class="rule-section">
+                        <h2 class="text-3xl font-orbitron font-bold text-white border-b-2 border-orange-500 pb-2 mb-6 flex items-center gap-4"><i class="ph-fill ph-pause"></i>10. PAUSAS</h2>
+                        <div class="space-y-6 text-slate-300 leading-relaxed bg-zinc-900 p-6 rounded-lg">
+                            <p>Cada equipo tiene derecho a 15 minutos de pausa para cada partido. En caso de que un equipo haya agotado los 15 minutos, el equipo contrario podrá elegir si continuar el mapa o esperar más tiempo. Si el equipo contrario decide continuar el mapa, el equipo al que se le agotó el tiempo de pausa podrá elegir rendirse y dar el mapa al equipo contrario.</p>
+                        </div>
+                    </section>
+
+                    <section id="puntualidad" class="rule-section">
+                        <h2 class="text-3xl font-orbitron font-bold text-white border-b-2 border-orange-500 pb-2 mb-6 flex items-center gap-4"><i class="ph-fill ph-clock"></i>11. PUNTUALIDAD</h2>
+                        <div class="space-y-6 text-slate-300 leading-relaxed bg-zinc-900 p-6 rounded-lg">
+                            <p>Cada equipo tiene la obligación de llegar a tiempo a los partidos, habrá un tiempo límite de 15 minutos para presentarse, si no se han presentado después de esos 15 minutos, perderán el partido.</p>
+                        </div>
+                    </section>
+                    
+                    <section id="stream" class="rule-section">
+                        <h2 class="text-3xl font-orbitron font-bold text-white border-b-2 border-orange-500 pb-2 mb-6 flex items-center gap-4"><i class="ph-fill ph-twitch-logo"></i>12. STREAM</h2>
+                        <div class="space-y-6 text-slate-300 leading-relaxed bg-zinc-900 p-6 rounded-lg">
+                           <ul>
+                               <li>Todos los partidos de la fase regular serán retransmitidos.</li>
+                               <li>No todos los partidos de las playoffs serán retransmitidos.</li>
+                               <li>La retransmisión de los partidos tendrá un retraso de 1 minuto para evitar el "streamsniping".</li>
+                               <li>Los jugadores pueden hacer stream desde su POV sin necesidad de incluir delay.</li>
+                           </ul>
+                        </div>
+                    </section>
+                    
+                    <section id="horario" class="rule-section">
+                        <h2 class="text-3xl font-orbitron font-bold text-white border-b-2 border-orange-500 pb-2 mb-6 flex items-center gap-4"><i class="ph-fill ph-calendar-check"></i>13. HORARIO</h2>
+                        <div class="space-y-6 text-slate-300 leading-relaxed bg-zinc-900 p-6 rounded-lg">
+                           <ul>
+                               <li>Los horarios de los partidos los podréis encontrar en el canal de #horario en el servidor de Discord de la Andromeda.</li>
+                               <li>Los partidos se jugarán de forma consecutiva, significando que aunque un partido acabe antes de lo previsto, el siguiente partido se jugará inmediatamente después. Se espera que los jugadores sean conscientes de este hecho y estén preparados para cuando su partido vaya a dar comienzo.</li>
+                           </ul>
+                        </div>
+                    </section>
+                    
+                    <section id="primer-mapa" class="rule-section">
+                        <h2 class="text-3xl font-orbitron font-bold text-white border-b-2 border-orange-500 pb-2 mb-6 flex items-center gap-4"><i class="ph-fill ph-map-pin"></i>PRIMER MAPA</h2>
+                        <div class="space-y-6 text-slate-300 leading-relaxed bg-zinc-900 p-6 rounded-lg">
+                            <p class="text-slate-400 italic">(TANTO PARA LA FASE REGULAR COMO PARA LOS CLASIFICATORIOS)</p>
+                            <ul>
+                               <li><strong>Semana 1:</strong> Torre Lijiang</li>
+                               <li><strong>Semana 2:</strong> Nepal</li>
+                               <li><strong>Semana 3:</strong> Ilios</li>
+                               <li><strong>Semana 4:</strong> Oasis</li>
+                               <li><strong>Semana 5:</strong> Busan</li>
+                               <li><strong>Semana 6:</strong> Península Antártica</li>
+                               <li><strong>Semana 7:</strong> Samoa</li>
+                           </ul>
+                        </div>
+                    </section>
+                    
+                    <section id="anti-account-share" class="rule-section">
+                        <h2 class="text-3xl font-orbitron font-bold text-white border-b-2 border-orange-500 pb-2 mb-6 flex items-center gap-4"><i class="ph-fill ph-shield-warning"></i>14. SISTEMA ANTI-ACCOUNT SHARE</h2>
+                        <div class="space-y-6 text-slate-300 leading-relaxed bg-zinc-900 p-6 rounded-lg">
+                            <p>Para prevenir cualquier intento de account share en la liga, se aplicarán las siguientes medidas, las cuales todos los jugadores, entrenadores y managers deberán seguir sin excepción:</p>
+                            <ul>
+                                <li>Todas las personas del equipo presentes en el lobby deberán estar conectadas al voice chat designado del equipo.</li>
+                                <li>Cada participante del equipo (jugadores, entrenadores y managers) deberá proporcionar un battle-tag, el cual usará de forma permanente durante toda la duración de la fase regular y las playoffs.</li>
+                                <li>En caso de tener que usar otra cuenta por la suspensión de la cuenta principal, se deberá reenviar el correo de Blizzard donde se notifica de la suspensión de la cuenta al correo electrónico proporcionado por el organizador.</li>
+                                <li>La persona que usa otra cuenta deberá enviarle el battle-tag que usará para unirse al lobby al organizador de la partida.</li>
+                                <li>El organizador agregará a esa persona a su lista de amigos y será esa persona la que invite esa cuenta al lobby.</li>
+                                <li>Esa persona solo podrá usar esa cuenta durante la duración de la suspensión de la cuenta principal, cuando se haya revocado la suspensión, tendrá que volver a usar la cuenta que proporcionó al inicio de la competición.</li>
+                                <li>En caso de ser una suspensión permanente, la nueva cuenta proporcionada será la cuenta principal de ahora en adelante.</li>
+                                <li>En caso de que el participante cambie el nombre de su cuenta, deberá enviarle a la organización el battle-tag actualizado con el nuevo nombre.</li>
+                                <li>En caso de no enviarle a la organización el nuevo battle-tag, esa persona no podrá entrar al lobby cuando se celebre un partido.</li>
+                            </ul>
+                        </div>
+                    </section>
+
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- ===== Footer ===== -->
+    <footer class="bg-black py-10">
+        <div class="container mx-auto px-6 text-center text-slate-500">
+            <!-- NUEVA SECCIÓN: Patrocinadores -->
+            <div class="mb-10">
+                <h3 class="text-sm uppercase tracking-widest text-slate-400 mb-6" data-translate="sponsorsTitle">Nuestros patrocinadores</h3>
+                <div class="flex justify-center items-center gap-8 opacity-60">
+                    <img src="assets/img/FACEIT.png" alt="FACEIT Logo" class="h-8 filter grayscale hover:grayscale-0 transition-all duration-300">
+                </div>
+            </div>
+            <div class="flex justify-center space-x-6 mt-6">
+                <a href="https://twitter.com/OWAndromedaes" target="_blank" class="hover:text-orange-500 transition-colors"><i class="ph-fill ph-twitter-logo text-2xl"></i></a>
+                <a href="https://www.twitch.tv/owandromedaes" target="_blank" class="hover:text-orange-500 transition-colors"><i class="ph-fill ph-twitch-logo text-2xl"></i></a>
+                <a href="https://discord.com/owandromeda" target="_blank" class="hover:text-orange-500 transition-colors"><i class="ph-fill ph-discord-logo text-2xl"></i></a>
+            </div>
+            <p class="mt-4 text-sm" data-translate="footerRights">© 2024 OW Andromeda. Todos los derechos reservados.</p>
+            <p class="mt-2 text-xs" data-translate="footerDisclaimer">Overwatch es una marca registrada de Blizzard Entertainment, Inc. Esta liga no está afiliada ni respaldada por Blizzard Entertainment.</p>
+        </div>
+    </footer>
+
+    <script>
+        // --- Lógica del menú móvil ---
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileMenuIcon = mobileMenuButton.querySelector('i');
+
+        mobileMenuButton.addEventListener('click', () => {
+            // Toggle menu visibility
+            mobileMenu.classList.toggle('hidden');
+            
+            // Adjust mobile menu links display
+            if (!mobileMenu.classList.contains('hidden')) {
+                const links = mobileMenu.querySelectorAll('a');
+                links.forEach(link => {
+                    link.classList.add('block', 'py-3', 'px-4', 'hover:bg-zinc-800');
+                    if (link.innerText === "Normativa") {
+                        link.classList.add('bg-zinc-800', 'text-orange-500', 'font-bold');
+                    }
+                    if (link.innerText === "Inscríbete") {
+                        link.classList.add('text-center', 'py-4', 'bg-orange-500', 'text-white', 'font-bold');
+                        link.classList.remove('hover:bg-zinc-800');
+                    }
+                });
+            }
+
+            // Toggle icon
+            mobileMenuIcon.classList.toggle('ph-list');
+            mobileMenuIcon.classList.toggle('ph-x');
+        });
+
+        // --- Lógica de la navegación lateral activa con scroll ---
+        const sections = document.querySelectorAll('.rule-section');
+        const navLinks = document.querySelectorAll('.sidebar-link');
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    navLinks.forEach(link => {
+                        link.classList.remove('active');
+                        if (link.getAttribute('href').substring(1) === entry.target.id) {
+                            link.classList.add('active');
+                        }
+                    });
+                }
+            });
+        }, { rootMargin: "-40% 0px -60% 0px" }); // Ajustado para mejor detección
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+
+    </script>
+
+</body>
+</html>
