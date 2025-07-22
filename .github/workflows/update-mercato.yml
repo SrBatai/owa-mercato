@@ -1,0 +1,35 @@
+name: Actualizar Mercato Diario
+
+on:
+  schedule:
+    # Se ejecuta todos los días a las 05:00 UTC (puedes ajustarlo)
+    - cron: '0 5 * * *'
+  workflow_dispatch:
+    # Permite ejecutarlo manualmente desde la pestaña "Actions" en GitHub
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 1. Clonar el repositorio
+        uses: actions/checkout@v3
+
+      - name: 2. Configurar Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: 3. Instalar dependencias
+        run: npm install
+
+      - name: 4. Crear archivo de credenciales desde el secreto
+        run: echo "${{ secrets.GOOGLE_CREDENTIALS }}" > credentials.json
+      
+      - name: 5. Ejecutar el script de actualización
+        run: node update-script.js
+        
+      - name: 6. Subir los cambios al repositorio
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: '📈 [Auto] Actualización de datos del mercato'
+          file_pattern: 'mercado.html'
